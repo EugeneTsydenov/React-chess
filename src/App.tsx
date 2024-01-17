@@ -1,10 +1,8 @@
 import {FC} from "react";
-import logo from './assets/logo-js.png';
+import AppRouter from "./route/AppRouter.tsx";
 const App: FC = () => {
   return (
-    <>
-      <img src={logo} alt=""/>
-    </>
+    <AppRouter/>
   );
 };
 
