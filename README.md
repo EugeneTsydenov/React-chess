@@ -6,5 +6,5 @@ This project uses the following technologies:
   3. MobX <img src="https://seeklogo.com/images/M/mobx-logo-0C59CBBAD9-seeklogo.com.png" alt="TS Logo" style="width: 15px; height: auto;">
   4. CSS modules
   5. axios
-  
+  6. JWT authorization
 
