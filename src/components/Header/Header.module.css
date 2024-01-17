@@ -1,0 +1,52 @@
+.Header {
+    -webkit-box-shadow: 2px 54px 66px -59px rgba(91, 148, 201, 0.6) inset;
+    -moz-box-shadow: 2px 54px 66px -59px rgba(91, 148, 201, 0.6) inset;
+    box-shadow: 2px 54px 66px -59px rgba(91, 148, 201, 0.6) inset;
+    min-height: 70px;
+}
+
+.Header__img {
+    width: 20px;
+    height: 20px;
+}
+
+.Header__wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-width: 100%;
+    padding-top: 18px;
+}
+
+.HeaderLeftWrapper {
+    display: flex;
+    align-items: center;
+    gap: 50px;
+}
+
+.HeaderRightWrapper {
+    display: flex;
+    align-items: center;
+    gap: 70px;
+}
+
+.HeaderBtnWrapper {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+.Header__login {
+    font-size: 20px;
+    font-weight: 500;
+    color: var(--secondary-yellow);
+}
+
+.Logo {
+    font-size: 35px;
+    transition: color .3s ease;
+}
+
+.Logo:hover {
+    color: var(--secondary-yellow);
+}

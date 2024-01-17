@@ -1,0 +1,20 @@
+.Text {
+    font-size: 17px;
+    transition: color .3s ease;
+}
+
+.Text:hover {
+    color: var(--secondary-yellow);
+}
+
+.Item {
+    position: relative;
+    background-color: transparent;
+    padding: 15px;
+}
+
+.ItemHover {
+    position: relative;
+    padding: 15px;
+    background-color: var(--secondary-black);
+}
