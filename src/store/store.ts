@@ -1,6 +1,6 @@
 import {makeAutoObservable} from "mobx";
 
-export default class Store {
+class Store {
   user: object = {};
   isAuth: boolean = false;
 
@@ -25,3 +25,5 @@ export default class Store {
     }
   }
 }
+
+export default new Store();
