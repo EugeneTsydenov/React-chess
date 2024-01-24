@@ -7,6 +7,7 @@ import {FC} from "react";
 
 
 const Header: FC = () => {
+
   return (
     <header className={styles.Header}>
       <div className='container-fluid'>
@@ -28,7 +29,7 @@ const Header: FC = () => {
                 <img className={styles.Header__img} src={settings} alt="Settings"/>
               </button>
             </div>
-            <Link to='/Login'>
+            <Link to='/login'>
               <span className={styles.Header__login}>Login</span>
             </Link>
           </div>
