@@ -23,6 +23,7 @@ export default class Store {
   async login (email: string, password: string):Promise<void> {
     try {
       const response:AxiosResponse<AuthResponse> = await AuthService.login(email, password);
+      await this.getUser()
       this.setAuth(true);
       this.setUser({username: 'dsfds'})
       localStorage.setItem('accessToken', response.data.accessToken);
@@ -34,7 +35,7 @@ export default class Store {
   async registration(email:string, password: string) {
     try {
       const response = await AuthService.registration(email, password);
-      console.log(response)
+      await this.getUser()
       localStorage.setItem('accessToken', response.data.accessToken);
       this.setAuth(true);
       this.setUser({username: 'dsfds'});
@@ -46,11 +47,14 @@ export default class Store {
   async checkAuth() {
     try {
       const response = await AuthService.refresh();
-      console.log(response)
+      console.log(response.data.accessToken)
+      await this.getUser();
       this.setAuth(true);
       localStorage.setItem('accessToken', response.data.accessToken);
     } catch (e) {
-      console.log(e);
+      this.setAuth(false);
+      this.setUser({} as IUser)
+      localStorage.removeItem('accessToken');
     }
   }
 
@@ -59,6 +63,16 @@ export default class Store {
     this.setUser({} as IUser);
     this.setAuth(false);
     localStorage.removeItem('accessToken');
-    console.log(response)
+  }
+
+  async getUser() {
+    try {
+      const response = await AuthService.getUser();
+      const user = response.data;
+      this.setUser(user);
+      this.setAuth(response.data.isAuth);
+    } catch (e) {
+      console.log(e)
+    }
   }
 }

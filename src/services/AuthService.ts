@@ -10,12 +10,16 @@ export default class AuthService {
   static async registration(email:string, password:string) {
     return $api.post('/registration', {email, password})
   }
-
   static async refresh() {
     return axios.get(`${BASE_API_URL}/refresh`, {withCredentials: true})
   }
 
   static async logout(): Promise<void> {
     return $api.post('/logout')
+  }
+
+  static async getUser() {
+    const response = $api.get('/user');
+    return response
   }
 }

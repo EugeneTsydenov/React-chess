@@ -27,7 +27,7 @@ $api.interceptors.response.use(
           `${BASE_API_URL}/refresh`,
           { withCredentials: true }
         );
-        localStorage.setItem('token', response.data.accessToken);
+        localStorage.setItem('accessToken', response.data.accessToken);
         originalRequest.headers.Authorization = `Bearer ${response.data.accessToken}`;
         return axios(originalRequest);
       } catch (e) {
