@@ -1,8 +1,8 @@
 import {FC, useEffect, useState} from "react";
-import Layout from "../../layouts/Layout.tsx";
-import LoginForm from "../../components/LoginForm/LoginForm.tsx";
 import {Link} from "react-router-dom";
 import {Box, Container, Typography} from "@mui/material";
+import Layout from "../../layouts/Layout.tsx";
+import LoginForm from "../../components/LoginForm/LoginForm.tsx";
 
 const LoginPage:FC = () => {
 	const [headerHeight, setHeaderHeight] = useState(0);

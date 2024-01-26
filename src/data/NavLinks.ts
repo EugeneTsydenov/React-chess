@@ -1,4 +1,4 @@
-import {LinkType, Links} from "../models/Links.tsx";
+import {LinkType, Links} from "../models/Links.ts";
 
 export const links: Links[] = [
   { title: 'Play', associatedLinks: playLinks('/play'), path: '/play'},

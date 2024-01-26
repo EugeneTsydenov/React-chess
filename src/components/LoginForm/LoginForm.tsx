@@ -1,4 +1,5 @@
 import {ChangeEvent, FC, FormEvent, useContext, useState} from "react";
+import {Context} from "../../main.tsx";
 import {
   Box, Button,
   FormControl,
@@ -11,7 +12,7 @@ import {
 } from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import {inputTheme} from "../../theme/theme.ts";
-import {Context} from "../../main.tsx";
+
 
 const LoginForm: FC = () => {
   const [email, setEmail] = useState('');

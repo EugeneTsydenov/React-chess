@@ -1,9 +1,9 @@
-import { useState, MouseEvent } from 'react';
+import { useState, MouseEvent, FC  } from 'react';
 import { NavLink } from "react-router-dom";
-import { FC } from "react";
-import { Links } from "../../models/Links.tsx";
-import NavDropDownMenu from "../NavDropDownMenu/NavDropDownMenu.tsx";
 import { Box, Typography } from "@mui/material";
+import NavDropDownMenu from "../NavDropDownMenu/NavDropDownMenu.tsx";
+import { Links } from "../../models/Links.ts";
+
 
 interface NavBarItemPropTypes {
 	link: Links;

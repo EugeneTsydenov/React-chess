@@ -1,6 +1,7 @@
 import {FC, useContext} from 'react';
-import { observer } from 'mobx-react-lite';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import {Context} from "../main.tsx";
+import { observer } from 'mobx-react-lite';
 import HomePage from '../pages/HomePage.tsx';
 import PlayPage from '../pages/PlayPages/PlayPage.tsx';
 import OnlineChessPage from '../pages/PlayPages/OnlineChessPage.tsx';
@@ -14,7 +15,6 @@ import InstrumentsPage from '../pages/InstrumentsPages/InstrumentsPage.tsx';
 import LoginPage from '../pages/LoginPage/LoginPage.tsx';
 import RegistrationPage from '../pages/RegistrationPage.tsx';
 import ProtectedRoute from './ProtectedRoute.tsx';
-import {Context} from "../main.tsx";
 
 const AppRouter: FC = () => {
   const {store} = useContext(Context);

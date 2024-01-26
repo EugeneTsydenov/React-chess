@@ -1,6 +1,6 @@
+import {AxiosResponse} from "axios";
 import {makeAutoObservable} from "mobx";
 import AuthService from "../services/AuthService.ts";
-import {AxiosResponse} from "axios";
 import {AuthResponse} from "../models/response/AuthResponse.ts";
 import {IUser} from "../models/IUser.ts";
 

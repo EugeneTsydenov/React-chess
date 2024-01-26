@@ -1,4 +1,6 @@
 import {FC, useContext} from "react";
+import {Link} from "react-router-dom";
+import {Context} from "../../main.tsx";
 import {
   AppBar,
   Container,
@@ -6,9 +8,7 @@ import {
   Typography
 } from "@mui/material";
 import NavBar from "../NavBar/Navbar.tsx";
-import {Link} from "react-router-dom";
 import MobileMenu from "../MobileMenu/MobileMenu.tsx";
-import {Context} from "../../main.tsx";
 import User from "../User/User.tsx";
 
 const Header: FC = () => {

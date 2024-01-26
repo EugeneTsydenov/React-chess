@@ -1,7 +1,7 @@
 import {FC} from 'react';
 import {Link} from "react-router-dom";
-import {LinkType} from "../../models/Links.tsx";
 import {MenuItem, MenuList, Typography} from "@mui/material";
+import {LinkType} from "../../models/Links.ts";
 
 interface NavDropDownMenuPropTypes {
   associatedLinks: LinkType[];

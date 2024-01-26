@@ -1,6 +1,6 @@
 import {React, useContext, useState} from 'react';
-import {Avatar, Box, IconButton, Menu, MenuItem, Tooltip, Typography} from "@mui/material";
 import {Context} from "../../main.tsx";
+import {Avatar, Box, IconButton, Menu, MenuItem, Tooltip, Typography} from "@mui/material";
 
 
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];

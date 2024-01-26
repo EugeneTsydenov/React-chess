@@ -1,8 +1,8 @@
 import {FC, useContext, useEffect} from "react";
-import './styles/App.css';
-import AppRouter from "./route/AppRouter.tsx";
-import {Context} from "./main.tsx";
 import {observer} from "mobx-react-lite";
+import {Context} from "./main.tsx";
+import AppRouter from "./route/AppRouter.tsx";
+import './styles/App.css';
 
 
 const App: FC =() => {

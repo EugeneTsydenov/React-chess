@@ -1,8 +1,8 @@
-import {links} from "../../data/NavLinks.js";
-import {Links} from "../../models/Links.tsx";
-import NavBarItem from "../NavBarItem/NavBarItem.tsx";
 import {FC} from "react";
 import {Box, MenuList} from "@mui/material";
+import NavBarItem from "../NavBarItem/NavBarItem.tsx";
+import {links} from "../../data/NavLinks.js";
+import {Links} from "../../models/Links.ts";
 
 const NavBar:FC = () => {
   return (
