@@ -1,13 +1,18 @@
-import styles from './NavBar.module.css'
 import {links} from "../../data/NavLinks.js";
 import {Links} from "../../models/Links.tsx";
 import NavBarItem from "../NavBarItem/NavBarItem.tsx";
 import {FC} from "react";
+import {Box, MenuList} from "@mui/material";
 
 const NavBar:FC = () => {
   return (
-    <nav>
-      <ul className={styles.List}>
+    <Box component={"nav"} sx={{flexGrow: 1, display: {xs: 'none', md: 'flex'}}}>
+      <MenuList
+        sx={{
+          display: 'flex',
+          alignItems: 'center'
+        }}
+      >
         {
           links.map((link: Links, i: number) => {
             return (
@@ -18,8 +23,8 @@ const NavBar:FC = () => {
             )
           })
         }
-      </ul>
-    </nav>
+      </MenuList>
+    </Box>
   );
 };
 

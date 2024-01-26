@@ -1,7 +1,7 @@
 import {FC} from 'react';
 import {Link} from "react-router-dom";
-import styles from './NavDropDownMenu.module.css'
 import {LinkType} from "../../models/Links.tsx";
+import {MenuItem, MenuList, Typography} from "@mui/material";
 
 interface NavDropDownMenuPropTypes {
   associatedLinks: LinkType[];
@@ -10,24 +10,46 @@ interface NavDropDownMenuPropTypes {
 
 const NavDropDownMenu: FC<NavDropDownMenuPropTypes> = ({associatedLinks, isHovered}) => {
   return (
-    <ul className={isHovered ? styles.ListFlex : styles.ListNone}>
+    <MenuList
+      sx={{
+        position: 'absolute',
+        top: '100%',
+        left: '0',
+        display: isHovered ? 'flex' : 'none',
+        flexDirection: 'column',
+        width: '170px',
+        zIndex: '2',
+        backgroundColor: 'primary.light'
+      }}
+    >
       {
         associatedLinks.map((link, index) => {
           return (
-            <li
+            <MenuItem
               key={link.path + index}
-              className={styles.Item}
+              sx={{
+                padding: '10px 15px',
+              }}
             >
               <Link to={link.path}>
-								<span className={styles.Text}>
-									{link.title}
-								</span>
+								<Typography
+                  sx={{
+                    fontSize: '16px',
+                    opacity: '.8',
+                    transition: 'all .3s ease',
+                    '&:hover': {
+                      color: 'secondary.main'
+                    }
+                  }}
+                >
+                  {link.title}
+                </Typography>
               </Link>
-            </li>
+            </MenuItem>
           )
         })
       }
-    </ul>
+    </MenuList>
   );
 };
 

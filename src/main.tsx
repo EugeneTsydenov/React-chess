@@ -1,8 +1,11 @@
 import {createContext} from 'react'
 import ReactDOM from 'react-dom/client'
-import App from './App.tsx'
+import App from './App.tsx';
+import './styles/base/fonts.css';
 import './index.css'
 import Store from "./store/store.ts";
+import {CssBaseline, ThemeProvider} from "@mui/material";
+import {theme} from "./theme/theme.ts";
 
 interface State  {
   store: Store
@@ -18,6 +21,9 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
   <Context.Provider value={{
     store
   }}>
-    <App />
+    <ThemeProvider theme={theme}>
+      <CssBaseline/>
+      <App/>
+    </ThemeProvider>
   </Context.Provider>,
 )

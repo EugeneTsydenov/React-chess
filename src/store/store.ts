@@ -21,11 +21,11 @@ export default class Store {
   }
 
   async login (email: string, password: string):Promise<void> {
+    console.log(email, password)
     try {
       const response:AxiosResponse<AuthResponse> = await AuthService.login(email, password);
       await this.getUser()
       this.setAuth(true);
-      this.setUser({username: 'dsfds'})
       localStorage.setItem('accessToken', response.data.accessToken);
     } catch (e) {
       console.log(e)
@@ -38,7 +38,6 @@ export default class Store {
       await this.getUser()
       localStorage.setItem('accessToken', response.data.accessToken);
       this.setAuth(true);
-      this.setUser({username: 'dsfds'});
     } catch (e) {
       console.log(e);
     }
@@ -63,6 +62,7 @@ export default class Store {
     this.setUser({} as IUser);
     this.setAuth(false);
     localStorage.removeItem('accessToken');
+    return response
   }
 
   async getUser() {
