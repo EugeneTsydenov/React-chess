@@ -1,0 +1,48 @@
+@font-face {
+    font-family: 'NotoSansRegular';
+    src: url("../../assets/fonts/NotoSans-Regular.woff2") format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'NotoSansLight';
+    src: url("../../assets/fonts/NotoSans-Light.woff2") format('woff2');
+    font-weight: 300;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'NotoSansBold';
+    src: url("../../assets/fonts/NotoSans-Bold.woff2") format('woff2');
+    font-weight: 700;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'NotoSansExtraLight';
+    src: url("../../assets/fonts/NotoSans-ExtraLight.woff2") format('woff2');
+    font-weight: 200;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'NotoSansMedium';
+    src: url("../../assets/fonts/NotoSans-Medium.woff2") format('woff2');
+    font-weight: 500;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'NotoSansSemiBold';
+    src: url("../../assets/fonts/NotoSans-SemiBold.woff2") format('woff2');
+    font-weight: 600;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'NotoSansExtraBold';
+    src: url("../../assets/fonts/NotoSans-ExtraBold.woff2") format('woff2');
+    font-weight: 800;
+    font-style: normal;
+}

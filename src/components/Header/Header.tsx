@@ -1,54 +1,80 @@
-import NavBar from '../NavBar/Navbar.tsx';
-import searchLoop from '../../assets/searchLoop.svg';
-import settings from '../../assets/settings.svg';
-import styles from './Header.module.css'
-import {Link} from "react-router-dom";
 import {FC, useContext} from "react";
+import {
+  AppBar,
+  Container,
+  Toolbar,
+  Typography
+} from "@mui/material";
+import NavBar from "../NavBar/Navbar.tsx";
+import {Link} from "react-router-dom";
+import MobileMenu from "../MobileMenu/MobileMenu.tsx";
 import {Context} from "../../main.tsx";
-
+import User from "../User/User.tsx";
 
 const Header: FC = () => {
   const {store} = useContext(Context);
 
   return (
-    <header className={styles.Header}>
-      <div className='container-fluid'>
-        <div className={styles.Header__wrapper}>
-          <div className={styles.HeaderLeftWrapper}>
-            <Link to='/'>
-              <h1 className={styles.Logo}>
-                ChessHub
-              </h1>
-            </Link>
-            <NavBar/>
-          </div>
-          <div className={styles.HeaderRightWrapper}>
-            <div className={styles.HeaderBtnWrapper}>
-              <button>
-                <img className={styles.Header__img} src={searchLoop} alt="SearchLoop"/>
-              </button>
-              <button>
-                <img className={styles.Header__img} src={settings} alt="Settings"/>
-              </button>
-            </div>
-            {
-              store.isAuth ?
-                <button
-                  className={styles.Header__login}
-                  onClick={() => {
-                    store.logout()
-                  }}
-                >
-                  Logout
-                </button> :
-                <Link to='/login'>
-                  <span className={styles.Header__login}>Login</span>
-                </Link>
-            }
-          </div>
-        </div>
-      </div>
-    </header>
+    <AppBar
+      sx={{
+        backgroundColor: 'secondary',
+        boxShadow: '2px 54px 66px -59px rgba(91, 148, 201, 0.6) inset',
+        position: 'relative',
+        backgroundImage: 'none',
+      }}
+      className='header'
+    >
+      <Container maxWidth="xl">
+        <Toolbar sx={{mt: 2}} disableGutters>
+          <Link to='/'>
+            <Typography
+              variant="h4"
+              noWrap
+              component="h1"
+              sx={{
+                mr: 12,
+                display: { xs: 'none', md: 'flex' },
+                fontFamily: 'NotoSansExtraBold',
+                fontWeight: 700,
+                letterSpacing: '.3rem',
+                color: 'primary',
+                textDecoration: 'none',
+              }}
+            >
+              ChessHub
+            </Typography>
+          </Link>
+          <MobileMenu/>
+          <Link to='/'>
+            <Typography
+              variant="h6"
+              noWrap
+              component="h1"
+              sx={{
+                mr: 30,
+                display: { xs: 'flex', md: 'none' },
+                fontFamily: 'NotoSansExtraBold',
+                fontWeight: 700,
+                letterSpacing: '.3rem',
+                fontSize: '25px',
+                color: 'primary',
+                textDecoration: 'none',
+              }}
+            >
+              ChessHub
+            </Typography>
+          </Link>
+          <NavBar/>
+          {
+            store.isAuth ?
+              <User/> :
+              <Link to='/login'>
+                Login
+              </Link>
+          }
+        </Toolbar>
+      </Container>
+    </AppBar>
   );
 };
 
