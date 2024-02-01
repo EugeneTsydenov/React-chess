@@ -33,6 +33,6 @@ npm run dev
 
 ## Backend 
 
-I also wrote a backend in nodejs, here is the repository:
+I also wrote a backend in Node.js, here is the repository:
 
 
