@@ -1,22 +1,17 @@
-import {FC, useContext, useEffect} from "react";
-import {observer} from "mobx-react-lite";
-import {Context} from "./main.tsx";
-import AppRouter from "./route/AppRouter.tsx";
+import { FC, useContext, useEffect } from 'react';
+import AppRouter from './route/AppRouter.tsx';
+import { Context } from './main.tsx';
 import './styles/App.css';
 
-
-const App: FC =() => {
-  const {store} = useContext(Context)
-
-  useEffect( () => {
-    if(localStorage.getItem('accessToken')) {
-      store.checkAuth()
+const App: FC = () => {
+  const { store } = useContext(Context);
+  useEffect(() => {
+    if (localStorage.getItem('accessToken')) {
+      store.checkAuth();
     }
-  }, [])
+  }, []);
 
-  return (
-    <AppRouter/>
-  );
+  return <AppRouter />;
 };
 
-export default observer(App)
+export default App;
