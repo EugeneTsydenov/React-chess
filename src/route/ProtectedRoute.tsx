@@ -1,16 +1,16 @@
-import {FC} from 'react';
-import {Navigate, Outlet} from "react-router-dom";
+import { Navigate, Outlet } from 'react-router-dom';
+import { FC } from 'react';
 
 interface ProtectedRouteProps {
-  isAuth: boolean
+  isAuth: boolean;
 }
 
-const ProtectedRoute: FC<ProtectedRouteProps> = ({isAuth}) => {
-  if(!isAuth) {
+const ProtectedRoute: FC<ProtectedRouteProps> = ({ isAuth }) => {
+  if (!isAuth) {
     return <Navigate to='/' replace />;
   }
 
-  return <Outlet/>
+  return <Outlet />;
 };
 
 export default ProtectedRoute;

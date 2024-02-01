@@ -6,5 +6,5 @@ export interface LinkType {
 export interface Links {
   title: string;
   associatedLinks: LinkType[];
-  path: string
+  path: string;
 }

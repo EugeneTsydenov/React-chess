@@ -1,8 +1,8 @@
-import {AxiosResponse} from "axios";
-import {makeAutoObservable} from "mobx";
-import AuthService from "../services/AuthService.ts";
-import {AuthResponse} from "../models/response/AuthResponse.ts";
-import {IUser} from "../models/IUser.ts";
+import { AuthResponse } from '../models/response/AuthResponse.ts';
+import AuthService from '../services/AuthService.ts';
+import { IUser } from '../models/IUser.ts';
+import { makeAutoObservable } from 'mobx';
+import { AxiosResponse } from 'axios';
 
 export default class Store {
   user = {} as IUser;
@@ -20,22 +20,21 @@ export default class Store {
     this.user = user;
   }
 
-  async login (email: string, password: string):Promise<void> {
-    console.log(email, password)
+  async login(email: string, password: string): Promise<void> {
+    console.log(email, password);
     try {
-      const response:AxiosResponse<AuthResponse> = await AuthService.login(email, password);
-      await this.getUser()
-      this.setAuth(true);
+      const response: AxiosResponse<AuthResponse> = await AuthService.login(email, password);
       localStorage.setItem('accessToken', response.data.accessToken);
+      await this.getUser();
     } catch (e) {
-      console.log(e)
+      console.log(e);
     }
   }
 
-  async registration(email:string, password: string) {
+  async registration(email: string, username: string, password: string) {
     try {
-      const response = await AuthService.registration(email, password);
-      await this.getUser()
+      const response = await AuthService.registration(email, username, password);
+      await this.getUser();
       localStorage.setItem('accessToken', response.data.accessToken);
       this.setAuth(true);
     } catch (e) {
@@ -46,13 +45,13 @@ export default class Store {
   async checkAuth() {
     try {
       const response = await AuthService.refresh();
-      console.log(response.data.accessToken)
+      console.log(response.data.accessToken);
       await this.getUser();
       this.setAuth(true);
       localStorage.setItem('accessToken', response.data.accessToken);
     } catch (e) {
       this.setAuth(false);
-      this.setUser({} as IUser)
+      this.setUser({} as IUser);
       localStorage.removeItem('accessToken');
     }
   }
@@ -62,7 +61,7 @@ export default class Store {
     this.setUser({} as IUser);
     this.setAuth(false);
     localStorage.removeItem('accessToken');
-    return response
+    return response;
   }
 
   async getUser() {
@@ -70,9 +69,10 @@ export default class Store {
       const response = await AuthService.getUser();
       const user = response.data;
       this.setUser(user);
-      this.setAuth(response.data.isAuth);
+      console.log(user);
+      this.setAuth(user.isAuth);
     } catch (e) {
-      console.log(e)
+      console.log(e);
     }
   }
 }

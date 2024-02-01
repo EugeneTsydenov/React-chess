@@ -1,4 +1,4 @@
-import { createTheme } from "@mui/material/styles";
+import { createTheme } from '@mui/material/styles';
 export const theme = createTheme({
   breakpoints: {
     values: {
@@ -7,7 +7,7 @@ export const theme = createTheme({
       md: 900,
       lg: 1200,
       xl: 1500,
-    }
+    },
   },
   palette: {
     mode: 'dark',
@@ -21,13 +21,13 @@ export const theme = createTheme({
       main: '#ffdf71',
       dark: '#f8e18d',
       light: '#dab83d',
-      contrastText: '#d9d2d2'
-    }
+      contrastText: '#d9d2d2',
+    },
   },
   typography: {
     fontFamily: 'NotoSansRegular, sans-serif',
-  }
-})
+  },
+});
 
 export const inputTheme = createTheme({
   palette: {
@@ -36,12 +36,12 @@ export const inputTheme = createTheme({
       main: '#ffdf71',
       dark: '#f8e18d',
       light: '#dab83d',
-      contrastText: '#d9d2d2'
+      contrastText: '#d9d2d2',
     },
     secondary: {
       main: '#589645',
       light: '#8acb77',
       dark: '#34791f',
-    }
+    },
   },
-})
+});

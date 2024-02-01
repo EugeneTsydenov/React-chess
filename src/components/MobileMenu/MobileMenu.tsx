@@ -1,9 +1,9 @@
-import {FC, React, useState} from 'react';
-import {Box, IconButton, Menu} from "@mui/material";
-import MenuIcon from "@mui/icons-material/Menu";
-import NavBar from "../NavBar/Navbar.tsx";
+import { Box, IconButton, Menu } from '@mui/material';
+import MenuIcon from '@mui/icons-material/Menu';
+import { FC, React, useState } from 'react';
+import NavBar from '../NavBar/Navbar.tsx';
 
-const MobileMenu:FC = () => {
+const MobileMenu: FC = () => {
   const [anchorElNav, setAnchorElNav] = useState(null);
 
   const handleOpenNavMenu = (event: React.MouseEventHandler<HTMLButtonElement>) => {
@@ -14,21 +14,20 @@ const MobileMenu:FC = () => {
     setAnchorElNav(null);
   };
 
-
   return (
     <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
       <IconButton
-        size="large"
-        aria-label="account of current user"
-        aria-controls="menu-appbar"
-        aria-haspopup="true"
+        size='large'
+        aria-label='account of current user'
+        aria-controls='menu-appbar'
+        aria-haspopup='true'
         onClick={handleOpenNavMenu}
-        color="inherit"
+        color='inherit'
       >
         <MenuIcon />
       </IconButton>
       <Menu
-        id="menu-appbar"
+        id='menu-appbar'
         anchorEl={anchorElNav}
         anchorOrigin={{
           vertical: 'bottom',
@@ -45,7 +44,7 @@ const MobileMenu:FC = () => {
           display: { xs: 'block', md: 'none' },
         }}
       >
-        <NavBar/>
+        <NavBar />
       </Menu>
     </Box>
   );

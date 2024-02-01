@@ -1,14 +1,12 @@
-import {FC} from 'react';
-import Layout from "../../layouts/Layout.tsx";
+import Layout from '../../layouts/Layout.tsx';
+import { FC } from 'react';
 
 const InstrumentsPage: FC = () => {
-	return (
-		<Layout>
-			<main>
-				Instruments
-			</main>
-		</Layout>
-	);
+  return (
+    <Layout>
+      <main>Instruments</main>
+    </Layout>
+  );
 };
 
 export default InstrumentsPage;

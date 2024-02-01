@@ -1,14 +1,14 @@
-import {FC} from 'react';
-import {Link} from "react-router-dom";
-import {MenuItem, MenuList, Typography} from "@mui/material";
-import {LinkType} from "../../models/Links.ts";
+import { MenuItem, MenuList, Typography } from '@mui/material';
+import { LinkType } from '../../models/Links.ts';
+import { Link } from 'react-router-dom';
+import { FC } from 'react';
 
 interface NavDropDownMenuPropTypes {
   associatedLinks: LinkType[];
-  isHovered: boolean
+  isHovered: boolean;
 }
 
-const NavDropDownMenu: FC<NavDropDownMenuPropTypes> = ({associatedLinks, isHovered}) => {
+const NavDropDownMenu: FC<NavDropDownMenuPropTypes> = ({ associatedLinks, isHovered }) => {
   return (
     <MenuList
       sx={{
@@ -19,36 +19,34 @@ const NavDropDownMenu: FC<NavDropDownMenuPropTypes> = ({associatedLinks, isHover
         flexDirection: 'column',
         width: '170px',
         zIndex: '2',
-        backgroundColor: 'primary.light'
+        backgroundColor: 'primary.light',
       }}
     >
-      {
-        associatedLinks.map((link, index) => {
-          return (
-            <MenuItem
-              key={link.path + index}
-              sx={{
-                padding: '10px 15px',
-              }}
-            >
-              <Link to={link.path}>
-								<Typography
-                  sx={{
-                    fontSize: '16px',
-                    opacity: '.8',
-                    transition: 'all .3s ease',
-                    '&:hover': {
-                      color: 'secondary.main'
-                    }
-                  }}
-                >
-                  {link.title}
-                </Typography>
-              </Link>
-            </MenuItem>
-          )
-        })
-      }
+      {associatedLinks.map((link, index) => {
+        return (
+          <MenuItem
+            key={link.path + index}
+            sx={{
+              padding: '10px 15px',
+            }}
+          >
+            <Link to={link.path}>
+              <Typography
+                sx={{
+                  fontSize: '16px',
+                  opacity: '.8',
+                  transition: 'all .3s ease',
+                  '&:hover': {
+                    color: 'secondary.main',
+                  },
+                }}
+              >
+                {link.title}
+              </Typography>
+            </Link>
+          </MenuItem>
+        );
+      })}
     </MenuList>
   );
 };

@@ -1,20 +1,20 @@
-import {LinkType, Links} from "../models/Links.ts";
+import { LinkType, Links } from '../models/Links.ts';
 
 export const links: Links[] = [
-  { title: 'Play', associatedLinks: playLinks('/play'), path: '/play'},
-  { title: 'Tasks', associatedLinks: taskLinks('/tasks'), path: '/tasks'},
-  { title: 'Education', associatedLinks: educationLinks('/education'), path: '/education'},
-  { title: 'Viewing', associatedLinks: viewingLinks('/viewing'), path: '/viewing'},
-  { title: 'Community', associatedLinks: communityLinks('/community'), path: '/community'},
-  { title: 'Instruments', associatedLinks: instrumentLinks('/instruments'), path: '/instruments'},
+  { title: 'Play', associatedLinks: playLinks('/play'), path: '/play' },
+  { title: 'Tasks', associatedLinks: taskLinks('/tasks'), path: '/tasks' },
+  { title: 'Education', associatedLinks: educationLinks('/education'), path: '/education' },
+  { title: 'Viewing', associatedLinks: viewingLinks('/viewing'), path: '/viewing' },
+  { title: 'Community', associatedLinks: communityLinks('/community'), path: '/community' },
+  { title: 'Instruments', associatedLinks: instrumentLinks('/instruments'), path: '/instruments' },
 ];
 
 function playLinks(mainTitle: string): LinkType[] {
   return [
-    { title: `Play online`, path: `${mainTitle}/online`},
-    { title: `Play against bot`, path: `${mainTitle}/bot`},
-    { title: `Play against friend`, path: `${mainTitle}/friend`},
-    { title: `Play offline`, path: `${mainTitle}/offline`},
+    { title: `Play online`, path: `${mainTitle}/online` },
+    { title: `Play against bot`, path: `${mainTitle}/bot` },
+    { title: `Play against friend`, path: `${mainTitle}/friend` },
+    { title: `Play offline`, path: `${mainTitle}/offline` },
   ];
 }
 

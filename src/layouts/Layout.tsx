@@ -1,18 +1,17 @@
-import {FC, ReactNode} from "react";
-import Header from "../components/Header/Header.tsx";
+import Header from '../components/Header/Header.tsx';
+import { FC, ReactNode } from 'react';
 
 interface LayoutProps {
-	children: ReactNode
+  children: ReactNode;
 }
 
-const Layout:FC<LayoutProps> = ({children}) => {
-
-	return (
-		<>
-			<Header/>
-			{children}
-		</>
-	);
+const Layout: FC<LayoutProps> = ({ children }) => {
+  return (
+    <>
+      <Header />
+      {children}
+    </>
+  );
 };
 
 export default Layout;
