@@ -12,10 +12,12 @@ import { Visibility, VisibilityOff } from '@mui/icons-material';
 import DefFrom from '../DefForm/DefFrom.tsx';
 import { Context } from '../../main.tsx';
 
-const LoginForm: FC = () => {
+const RegistrationForm: FC = () => {
   const [email, setEmail] = useState('');
+  const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
+
   const { store } = useContext(Context);
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
@@ -32,9 +34,13 @@ const LoginForm: FC = () => {
     setPassword(e.target.value);
   }
 
+  function handleUsername(e: ChangeEvent<HTMLInputElement>) {
+    setUsername(e.target.value);
+  }
+
   async function handleSubmit(event: FormEvent<HTMLFormElement>): Promise<void> {
     event.preventDefault();
-    await store.login(email, password);
+    await store.registration(email, username, password);
   }
 
   return (
@@ -48,6 +54,16 @@ const LoginForm: FC = () => {
           width: '40ch',
         }}
         onChange={handleEmail}
+      />
+      <TextField
+        id='outlined-basic'
+        label='Username'
+        variant='outlined'
+        required
+        sx={{
+          width: '40ch',
+        }}
+        onChange={handleUsername}
       />
       <FormControl
         sx={{
@@ -95,4 +111,4 @@ const LoginForm: FC = () => {
   );
 };
 
-export default LoginForm;
+export default RegistrationForm;

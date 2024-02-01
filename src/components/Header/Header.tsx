@@ -1,18 +1,13 @@
-import {FC, useContext} from "react";
-import {Link} from "react-router-dom";
-import {Context} from "../../main.tsx";
-import {
-  AppBar,
-  Container,
-  Toolbar,
-  Typography
-} from "@mui/material";
-import NavBar from "../NavBar/Navbar.tsx";
-import MobileMenu from "../MobileMenu/MobileMenu.tsx";
-import User from "../User/User.tsx";
+import { AppBar, Container, Toolbar, Typography } from '@mui/material';
+import MobileMenu from '../MobileMenu/MobileMenu.tsx';
+import User from '../UserComponents/User.tsx';
+import NavBar from '../NavBar/Navbar.tsx';
+import { Context } from '../../main.tsx';
+import { Link } from 'react-router-dom';
+import { FC, useContext } from 'react';
 
 const Header: FC = () => {
-  const {store} = useContext(Context);
+  const { store } = useContext(Context);
 
   return (
     <AppBar
@@ -24,13 +19,13 @@ const Header: FC = () => {
       }}
       className='header'
     >
-      <Container maxWidth="xl">
-        <Toolbar sx={{mt: 2}} disableGutters>
+      <Container maxWidth='xl'>
+        <Toolbar sx={{ mt: 2 }} disableGutters>
           <Link to='/'>
             <Typography
-              variant="h4"
+              variant='h4'
               noWrap
-              component="h1"
+              component='h1'
               sx={{
                 mr: 12,
                 display: { xs: 'none', md: 'flex' },
@@ -44,12 +39,12 @@ const Header: FC = () => {
               ChessHub
             </Typography>
           </Link>
-          <MobileMenu/>
+          <MobileMenu />
           <Link to='/'>
             <Typography
-              variant="h6"
+              variant='h6'
               noWrap
-              component="h1"
+              component='h1'
               sx={{
                 mr: 30,
                 display: { xs: 'flex', md: 'none' },
@@ -64,14 +59,8 @@ const Header: FC = () => {
               ChessHub
             </Typography>
           </Link>
-          <NavBar/>
-          {
-            store.isAuth ?
-              <User/> :
-              <Link to='/login'>
-                Login
-              </Link>
-          }
+          <NavBar />
+          {store.user.isAuth ? <User /> : <Link to='/login'>Login</Link>}
         </Toolbar>
       </Container>
     </AppBar>
