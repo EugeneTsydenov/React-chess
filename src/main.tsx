@@ -14,7 +14,7 @@ interface State {
 export const store = new Store();
 
 export const Context = createContext<State>({
-  store
+  store,
 });
 
 // const client = new QueryClient();
@@ -22,7 +22,7 @@ export const Context = createContext<State>({
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <Context.Provider
     value={{
-      store
+      store,
     }}
   >
     <ThemeProvider theme={theme}>
