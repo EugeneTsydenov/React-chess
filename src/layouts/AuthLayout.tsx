@@ -1,4 +1,4 @@
-import { Box, Container, Typography } from '@mui/material';
+import { Box, Card, Container, Typography } from '@mui/material';
 import { FC, ReactNode, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Layout from './Layout.tsx';
@@ -21,8 +21,8 @@ const AuthLayout: FC<AuthLayoutProps> = ({ children, isLogin }) => {
 
   return (
     <Layout>
-      <main className='main'>
-        <section className='login'>
+      <main>
+        <section>
           <Container maxWidth='lg'>
             <Box
               sx={{
@@ -34,14 +34,12 @@ const AuthLayout: FC<AuthLayoutProps> = ({ children, isLogin }) => {
                 minHeight: `calc(100vh - ${headerHeight}px)`,
               }}
             >
-              <Box
+              <Card
                 sx={{
                   display: 'flex',
                   flexDirection: 'column',
                   alignItems: 'center',
                   padding: '15px 20px',
-                  borderRadius: '15px',
-                  backgroundColor: 'primary.light',
                 }}
               >
                 <Typography component='h1' variant='h4' color='primary.contrastText' mb={4}>
@@ -63,7 +61,7 @@ const AuthLayout: FC<AuthLayoutProps> = ({ children, isLogin }) => {
                   )}
                   {isLogin && <Link to='/#'>Forgot your password?</Link>}
                 </Box>
-              </Box>
+              </Card>
             </Box>
           </Container>
         </section>

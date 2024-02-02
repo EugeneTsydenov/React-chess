@@ -26,11 +26,7 @@ interface DefFormProps {
 
 const DefForm: FC<DefFormProps> = ({ method, name }) => {
   const [showPassword, setShowPassword] = useState(false);
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<FormValues>();
+  const { register, handleSubmit } = useForm<FormValues>();
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
 

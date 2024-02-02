@@ -21,10 +21,9 @@ export default class Store {
   }
 
   async login(email: string, password: string): Promise<void> {
-    console.log(email, password);
     try {
       const response: AxiosResponse<AuthResponse> = await AuthService.login(email, password);
-      localStorage.setItem('accessToken', response.data.accessToken);
+      localStorage.setItem('isAuth', 'true');
       await this.getUser();
     } catch (e) {
       console.log(e);
@@ -35,7 +34,7 @@ export default class Store {
     try {
       const response = await AuthService.registration(email, username, password);
       await this.getUser();
-      localStorage.setItem('accessToken', response.data.accessToken);
+      localStorage.setItem('isAuth', 'true');
       this.setAuth(true);
     } catch (e) {
       console.log(e);
@@ -45,14 +44,13 @@ export default class Store {
   async checkAuth() {
     try {
       const response = await AuthService.refresh();
-      console.log(response.data.accessToken);
       await this.getUser();
       this.setAuth(true);
-      localStorage.setItem('accessToken', response.data.accessToken);
+      localStorage.setItem('isAuth', 'true');
     } catch (e) {
       this.setAuth(false);
       this.setUser({} as IUser);
-      localStorage.removeItem('accessToken');
+      localStorage.removeItem('isAuth');
     }
   }
 
@@ -60,7 +58,7 @@ export default class Store {
     const response = await AuthService.logout();
     this.setUser({} as IUser);
     this.setAuth(false);
-    localStorage.removeItem('accessToken');
+    localStorage.removeItem('isAuth');
     return response;
   }
 

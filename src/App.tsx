@@ -6,7 +6,7 @@ import './styles/App.css';
 const App: FC = () => {
   const { store } = useContext(Context);
   useEffect(() => {
-    if (localStorage.getItem('accessToken')) {
+    if (localStorage.getItem('isAuth')) {
       store.checkAuth();
     }
   }, []);

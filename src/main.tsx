@@ -17,8 +17,6 @@ export const Context = createContext<State>({
   store,
 });
 
-// const client = new QueryClient();
-
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <Context.Provider
     value={{

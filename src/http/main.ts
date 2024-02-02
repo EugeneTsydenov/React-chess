@@ -9,11 +9,6 @@ const $api = axios.create({
   timeout: 1500,
 });
 
-$api.interceptors.request.use((config) => {
-  config.headers.Authorization = `Bearer ${localStorage.getItem('accessToken')}`;
-  return config;
-});
-
 $api.interceptors.response.use(
   (response) => {
     return response;
@@ -23,11 +18,10 @@ $api.interceptors.response.use(
     if (error.response.status === 401 && !originalRequest._isRetry) {
       originalRequest._isRetry = true;
       try {
-        const response = await axios.get<AuthResponse>(`${BASE_API_URL}/refresh`, {
+        await axios.get<AuthResponse>(`${BASE_API_URL}/refresh`, {
           withCredentials: true,
         });
-        localStorage.setItem('accessToken', response.data.accessToken);
-        originalRequest.headers.Authorization = `Bearer ${response.data.accessToken}`;
+        localStorage.setItem('isAuth', 'true');
         return axios(originalRequest);
       } catch (e) {
         console.log('НЕ АВТОРИЗОВАН');
