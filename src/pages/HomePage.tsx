@@ -1,7 +1,7 @@
 import Layout from '../layouts/Layout.tsx';
-import { FC } from 'react';
+import * as React from 'react';
 
-const HomePage: FC = () => {
+const HomePage: React.FC = () => {
   return (
     <Layout>
       <main>main</main>

@@ -1,7 +1,7 @@
 import Layout from '../../layouts/Layout.tsx';
-import { FC } from 'react';
+import * as React from 'react';
 
-const OnlineChessPage: FC = () => {
+const OnlineChessPage: React.FC = () => {
   return (
     <Layout>
       <main>Online Chess</main>

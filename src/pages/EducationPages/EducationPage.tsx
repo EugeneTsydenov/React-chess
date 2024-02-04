@@ -1,7 +1,7 @@
 import Layout from '../../layouts/Layout.tsx';
-import { FC } from 'react';
+import * as React from 'react';
 
-const EducationPage: FC = () => {
+const EducationPage: React.FC = () => {
   return (
     <Layout>
       <main>Education</main>

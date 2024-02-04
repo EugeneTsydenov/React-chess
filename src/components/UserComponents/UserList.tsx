@@ -1,6 +1,6 @@
 import UserItem from './UserItem.tsx';
 import { Menu } from '@mui/material';
-import { FC } from 'react';
+import * as React from 'react';
 
 interface UserListProps {
   anchorElUser: HTMLElement | null;
@@ -9,7 +9,7 @@ interface UserListProps {
 
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
-const UserList: FC<UserListProps> = ({ anchorElUser, handleCloseUserMenu }) => {
+const UserList: React.FC<UserListProps> = ({ anchorElUser, handleCloseUserMenu }) => {
   return (
     <Menu
       sx={{ mt: '45px' }}

@@ -1,6 +1,6 @@
-import { FC } from 'react';
+import * as React from 'react';
 
-const UserAccountPage: FC = () => {
+const UserAccountPage: React.FC = () => {
   return <div></div>;
 };
 

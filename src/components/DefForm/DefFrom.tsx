@@ -13,7 +13,7 @@ import { Visibility, VisibilityOff } from '@mui/icons-material';
 import { FormValues } from '../../models/IForm.ts';
 import { inputTheme } from '../../theme/theme';
 import { useForm } from 'react-hook-form';
-import { FC, useState } from 'react';
+import * as React from 'react';
 
 interface DefFormProps {
   method: (data: {
@@ -24,8 +24,8 @@ interface DefFormProps {
   name: 'login' | 'registration';
 }
 
-const DefForm: FC<DefFormProps> = ({ method, name }) => {
-  const [showPassword, setShowPassword] = useState(false);
+const DefForm: React.FC<DefFormProps> = ({ method, name }) => {
+  const [showPassword, setShowPassword] = React.useState(false);
   const { register, handleSubmit } = useForm<FormValues>();
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
@@ -117,7 +117,7 @@ const DefForm: FC<DefFormProps> = ({ method, name }) => {
               mb: '25px',
             }}
           >
-            Login
+            {name === 'login' ? 'login' : 'registration'}
           </Button>
         </Box>
       </form>

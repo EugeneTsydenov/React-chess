@@ -1,6 +1,5 @@
-import { FC } from 'react';
-
-const UserDashboardPage: FC = () => {
+import * as React from 'react';
+const UserDashboardPage: React.FC = () => {
   return <div></div>;
 };
 

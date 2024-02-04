@@ -1,12 +1,12 @@
 import { Box, IconButton, Menu } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
-import { FC, React, useState } from 'react';
 import NavBar from '../NavBar/Navbar.tsx';
+import * as React from 'react';
 
-const MobileMenu: FC = () => {
-  const [anchorElNav, setAnchorElNav] = useState(null);
+const MobileMenu: React.FC = () => {
+  const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
 
-  const handleOpenNavMenu = (event: React.MouseEventHandler<HTMLButtonElement>) => {
+  const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
   };
 
