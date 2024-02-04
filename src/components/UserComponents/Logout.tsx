@@ -1,25 +1,32 @@
+import { useAuth } from '../../hooks/useAuth.ts';
 import { observer } from 'mobx-react-lite';
 import { Typography } from '@mui/material';
-import { Context } from '../../main.tsx';
-import { FC, useContext } from 'react';
+import * as React from 'react';
 
 interface LogoutProps {
   setting: string;
 }
 
-const Logout: FC<LogoutProps> = ({ setting }) => {
-  const { store } = useContext(Context);
+const Logout: React.FC<LogoutProps> = observer(({ setting }) => {
+  const { logout } = useAuth();
 
   return (
     <button
       type='submit'
-      onClick={async () => {
-        await store.logout();
+      onClick={(e) => {
+        e.stopPropagation();
+        logout.mutate();
       }}
     >
-      <Typography>{setting}</Typography>
+      <Typography
+        sx={{
+          padding: '6px 16px',
+        }}
+      >
+        {setting}
+      </Typography>
     </button>
   );
-};
+});
 
-export default observer(Logout);
+export default Logout;

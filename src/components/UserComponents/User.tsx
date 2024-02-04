@@ -1,15 +1,14 @@
-import { Avatar, Box, IconButton, Tooltip, Typography } from '@mui/material';
-import { FC, MouseEventHandler, useContext, useState } from 'react';
-import { Context } from '../../main.tsx';
+import { Avatar, Box, IconButton, Skeleton, Tooltip, Typography } from '@mui/material';
+import useUser from '../../hooks/useUser.ts';
+import { observer } from 'mobx-react-lite';
 import UserList from './UserList.tsx';
+import * as React from 'react';
 
-interface UserProps {}
+const User: React.FC = observer(() => {
+  const { data, isLoading } = useUser();
 
-const User: FC<UserProps> = () => {
-  const [anchorElUser, setAnchorElUser] = useState<HTMLElement | null>(null);
-  const { store } = useContext(Context);
-
-  const handleOpenUserMenu: MouseEventHandler<HTMLButtonElement> = (event) => {
+  const [anchorElUser, setAnchorElUser] = React.useState<HTMLElement | null>(null);
+  const handleOpenUserMenu: React.MouseEventHandler<HTMLButtonElement> = (event) => {
     setAnchorElUser(event.currentTarget);
   };
 
@@ -18,16 +17,32 @@ const User: FC<UserProps> = () => {
   };
 
   return (
-    <Box sx={{ flexGrow: 0 }}>
-      <Tooltip title='Open settings'>
-        <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-          <Avatar alt='Remy Sharp' src={store.user.avatar} />
-        </IconButton>
-      </Tooltip>
-      <Typography component='span'>{store.user.username}</Typography>
-      <UserList anchorElUser={anchorElUser} handleCloseUserMenu={handleCloseUserMenu} />
+    <Box
+      sx={{
+        flexGrow: 0,
+        display: 'flex',
+        alignItems: 'center',
+        gap: '5px',
+      }}
+    >
+      {isLoading || data === undefined ? (
+        <>
+          <Skeleton animation='wave' variant='circular' width={40} height={40} />
+          <Skeleton width={50} />
+        </>
+      ) : (
+        <>
+          <Tooltip title='Open settings'>
+            <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+              <Avatar alt='Remy Sharp' src={data.avatar} />
+            </IconButton>
+          </Tooltip>
+          <Typography component='span'>{data.username}</Typography>
+          <UserList anchorElUser={anchorElUser} handleCloseUserMenu={handleCloseUserMenu} />
+        </>
+      )}
     </Box>
   );
-};
+});
 
 export default User;
