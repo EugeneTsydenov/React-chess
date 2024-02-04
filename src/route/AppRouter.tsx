@@ -18,7 +18,7 @@ import * as React from 'react';
 
 const AppRouter: React.FC = observer(() => {
   const isAuth = authStore.isAuth;
-  console.log(2);
+
   return (
     <Router>
       <Routes>

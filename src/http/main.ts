@@ -24,7 +24,7 @@ $api.interceptors.response.use(
         localStorage.setItem('isAuth', 'true');
         return axios(originalRequest);
       } catch (e) {
-        console.log('НЕ АВТОРИЗОВАН');
+        console.log(e);
       }
     }
     throw error;

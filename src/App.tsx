@@ -6,7 +6,6 @@ import * as React from 'react';
 import './styles/App.css';
 
 const App: React.FC = observer(() => {
-  console.log(1);
   const { refresh } = useAuth();
 
   const { checkAuth } = authLocalStorageHelper();

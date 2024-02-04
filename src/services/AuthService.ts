@@ -22,7 +22,6 @@ export default class AuthService {
     return $api.post('/registration', { email, username, password });
   }
   static async refresh() {
-    console.log('refresh');
     return axios.get(`${BASE_API_URL}/refresh`, { withCredentials: true });
   }
 
@@ -31,7 +30,6 @@ export default class AuthService {
   }
 
   static async getUser(): Promise<AxiosResponse> {
-    console.log('useer');
     return $api.get<IUser>('/user');
   }
 }
