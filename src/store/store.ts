@@ -1,11 +1,6 @@
-import { AuthResponse } from '../models/response/AuthResponse.ts';
-import AuthService from '../services/AuthService.ts';
-import { IUser } from '../models/IUser.ts';
 import { makeAutoObservable } from 'mobx';
-import { AxiosResponse } from 'axios';
 
-export default class Store {
-  user = {} as IUser;
+class AuthStore {
   isAuth: boolean = false;
 
   constructor() {
@@ -15,62 +10,6 @@ export default class Store {
   setAuth(bool: boolean): void {
     this.isAuth = bool;
   }
-
-  setUser(user: IUser): void {
-    this.user = user;
-  }
-
-  async login(email: string, password: string): Promise<void> {
-    try {
-      const response: AxiosResponse<AuthResponse> = await AuthService.login(email, password);
-      localStorage.setItem('isAuth', 'true');
-      await this.getUser();
-    } catch (e) {
-      console.log(e);
-    }
-  }
-
-  async registration(email: string, username: string, password: string) {
-    try {
-      const response = await AuthService.registration(email, username, password);
-      await this.getUser();
-      localStorage.setItem('isAuth', 'true');
-      this.setAuth(true);
-    } catch (e) {
-      console.log(e);
-    }
-  }
-
-  async checkAuth() {
-    try {
-      const response = await AuthService.refresh();
-      await this.getUser();
-      this.setAuth(true);
-      localStorage.setItem('isAuth', 'true');
-    } catch (e) {
-      this.setAuth(false);
-      this.setUser({} as IUser);
-      localStorage.removeItem('isAuth');
-    }
-  }
-
-  async logout() {
-    const response = await AuthService.logout();
-    this.setUser({} as IUser);
-    this.setAuth(false);
-    localStorage.removeItem('isAuth');
-    return response;
-  }
-
-  async getUser() {
-    try {
-      const response = await AuthService.getUser();
-      const user = response.data;
-      this.setUser(user);
-      console.log(user);
-      this.setAuth(user.isAuth);
-    } catch (e) {
-      console.log(e);
-    }
-  }
 }
+
+export const authStore = new AuthStore();
