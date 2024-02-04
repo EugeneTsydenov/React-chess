@@ -11,19 +11,21 @@ import LoginPage from '../pages/LoginPage/LoginPage.tsx';
 import TaskPage from '../pages/TasksPages/TaskPage.tsx';
 import PlayPage from '../pages/PlayPages/PlayPage.tsx';
 import ProtectedRoute from './ProtectedRoute.tsx';
+import { authStore } from '../store/store.ts';
 import HomePage from '../pages/HomePage.tsx';
 import { observer } from 'mobx-react-lite';
-import { FC, useContext } from 'react';
-import { Context } from '../main.tsx';
-const AppRouter: FC = () => {
-  const { store } = useContext(Context);
+import * as React from 'react';
+
+const AppRouter: React.FC = observer(() => {
+  const isAuth = authStore.isAuth;
+  console.log(2);
   return (
     <Router>
       <Routes>
         <Route path='/' element={<HomePage />} />
         <Route path='play'>
           <Route index element={<PlayPage />} />
-          <Route element={<ProtectedRoute isAuth={store.isAuth} />}>
+          <Route element={<ProtectedRoute isAuth={isAuth} />}>
             <Route path='online' element={<OnlineChessPage />} />
             <Route path='friend' element={<FriendChessPage />} />
           </Route>
@@ -35,13 +37,13 @@ const AppRouter: FC = () => {
         <Route path='viewing' element={<ViewingPage />} />
         <Route path='community' element={<CommunityPage />} />
         <Route path='instruments' element={<InstrumentsPage />} />
-        <Route element={<ProtectedRoute isAuth={!store.isAuth} />}>
+        <Route element={<ProtectedRoute isAuth={!isAuth} />}>
           <Route path='login' element={<LoginPage />} />
           <Route path='registration' element={<RegistrationPage />} />
         </Route>
       </Routes>
     </Router>
   );
-};
+});
 
-export default observer(AppRouter);
+export default AppRouter;
