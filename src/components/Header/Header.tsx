@@ -1,23 +1,22 @@
 import { AppBar, Container, Toolbar, Typography } from '@mui/material';
 import MobileMenu from '../MobileMenu/MobileMenu.tsx';
+import { authStore } from '../../store/store.ts';
 import User from '../UserComponents/User.tsx';
+import { observer } from 'mobx-react-lite';
 import NavBar from '../NavBar/Navbar.tsx';
-import { Context } from '../../main.tsx';
 import { Link } from 'react-router-dom';
-import { FC, useContext } from 'react';
+import * as React from 'react';
 
-const Header: FC = () => {
-  const { store } = useContext(Context);
-
+const Header: React.FC = observer(() => {
   return (
     <AppBar
       sx={{
         backgroundColor: 'secondary',
         boxShadow: '2px 54px 66px -59px rgba(91, 148, 201, 0.6) inset',
-        position: 'relative',
         backgroundImage: 'none',
       }}
       className='header'
+      position='fixed'
     >
       <Container maxWidth='xl'>
         <Toolbar sx={{ mt: 2 }} disableGutters>
@@ -60,11 +59,11 @@ const Header: FC = () => {
             </Typography>
           </Link>
           <NavBar />
-          {store.user.isAuth ? <User /> : <Link to='/login'>Login</Link>}
+          {authStore.isAuth ? <User /> : <Link to='/login'>Login</Link>}
         </Toolbar>
       </Container>
     </AppBar>
   );
-};
+});
 
 export default Header;

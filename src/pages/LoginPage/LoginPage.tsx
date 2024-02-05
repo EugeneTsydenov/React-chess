@@ -1,8 +1,8 @@
 import LoginForm from '../../components/LoginForm/LoginForm.tsx';
 import AuthLayout from '../../layouts/AuthLayout.tsx';
-import { FC } from 'react';
+import * as React from 'react';
 
-const LoginPage: FC = () => {
+const LoginPage: React.FC = () => {
   return (
     <AuthLayout isLogin={true}>
       <LoginForm />

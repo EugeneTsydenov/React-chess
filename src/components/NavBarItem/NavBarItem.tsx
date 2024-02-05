@@ -1,23 +1,23 @@
 import NavDropDownMenu from '../NavDropDownMenu/NavDropDownMenu.tsx';
-import { useState, MouseEvent, FC } from 'react';
 import { Box, Typography } from '@mui/material';
 import { Links } from '../../models/Links.ts';
 import { NavLink } from 'react-router-dom';
+import * as React from 'react';
 
 interface NavBarItemPropTypes {
   link: Links;
 }
 
-const NavBarItem: FC<NavBarItemPropTypes> = ({ link }) => {
-  const [isHovered, setHovered] = useState(false);
+const NavBarItem: React.FC<NavBarItemPropTypes> = ({ link }) => {
+  const [isHovered, setHovered] = React.useState(false);
   const { title, associatedLinks, path } = link;
 
-  const handleMouseEnter = (e: MouseEvent<HTMLLIElement>) => {
+  const handleMouseEnter = (e: React.MouseEvent<HTMLLIElement>) => {
     e.stopPropagation();
     setHovered(true);
   };
 
-  const handleMouseLeave = (e: MouseEvent<HTMLLIElement>) => {
+  const handleMouseLeave = (e: React.MouseEvent<HTMLLIElement>) => {
     e.stopPropagation();
     setHovered(false);
   };

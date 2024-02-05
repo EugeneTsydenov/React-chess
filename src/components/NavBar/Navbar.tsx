@@ -2,9 +2,8 @@ import NavBarItem from '../NavBarItem/NavBarItem.tsx';
 import { links } from '../../data/NavLinks.js';
 import { Links } from '../../models/Links.ts';
 import { Box, MenuList } from '@mui/material';
-import { FC } from 'react';
-
-const NavBar: FC = () => {
+import * as React from 'react';
+const NavBar: React.FC = () => {
   return (
     <Box component={'nav'} sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
       <MenuList

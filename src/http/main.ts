@@ -6,7 +6,7 @@ export const BASE_API_URL: string = 'http://localhost:52718/api';
 const $api = axios.create({
   withCredentials: true,
   baseURL: BASE_API_URL,
-  timeout: 1500,
+  timeout: 10000,
 });
 
 $api.interceptors.response.use(
@@ -24,7 +24,7 @@ $api.interceptors.response.use(
         localStorage.setItem('isAuth', 'true');
         return axios(originalRequest);
       } catch (e) {
-        console.log('НЕ АВТОРИЗОВАН');
+        console.log(e);
       }
     }
     throw error;

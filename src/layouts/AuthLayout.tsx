@@ -1,24 +1,14 @@
 import { Box, Card, Container, Typography } from '@mui/material';
-import { FC, ReactNode, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Layout from './Layout.tsx';
+import * as React from 'react';
 
 interface AuthLayoutProps {
-  children: ReactNode;
+  children: React.ReactNode;
   isLogin: boolean;
 }
 
-const AuthLayout: FC<AuthLayoutProps> = ({ children, isLogin }) => {
-  const [headerHeight, setHeaderHeight] = useState(0);
-
-  useEffect(() => {
-    const header = document.querySelector('.header');
-    if (header) {
-      const height = header.clientHeight;
-      setHeaderHeight(height);
-    }
-  }, []);
-
+const AuthLayout: React.FC<AuthLayoutProps> = ({ children, isLogin }) => {
   return (
     <Layout>
       <main>
@@ -31,7 +21,7 @@ const AuthLayout: FC<AuthLayoutProps> = ({ children, isLogin }) => {
                 justifyContent: 'center',
                 flexDirection: 'column',
                 gap: '10px',
-                minHeight: `calc(100vh - ${headerHeight}px)`,
+                minHeight: '100vh',
               }}
             >
               <Card

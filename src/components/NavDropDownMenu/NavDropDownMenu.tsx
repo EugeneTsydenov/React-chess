@@ -1,14 +1,14 @@
 import { MenuItem, MenuList, Typography } from '@mui/material';
 import { LinkType } from '../../models/Links.ts';
 import { Link } from 'react-router-dom';
-import { FC } from 'react';
+import * as React from 'react';
 
 interface NavDropDownMenuPropTypes {
   associatedLinks: LinkType[];
   isHovered: boolean;
 }
 
-const NavDropDownMenu: FC<NavDropDownMenuPropTypes> = ({ associatedLinks, isHovered }) => {
+const NavDropDownMenu: React.FC<NavDropDownMenuPropTypes> = ({ associatedLinks, isHovered }) => {
   return (
     <MenuList
       sx={{

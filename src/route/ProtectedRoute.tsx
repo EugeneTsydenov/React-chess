@@ -1,11 +1,11 @@
 import { Navigate, Outlet } from 'react-router-dom';
-import { FC } from 'react';
+import * as React from 'react';
 
 interface ProtectedRouteProps {
   isAuth: boolean;
 }
 
-const ProtectedRoute: FC<ProtectedRouteProps> = ({ isAuth }) => {
+const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ isAuth }) => {
   if (!isAuth) {
     return <Navigate to='/' replace />;
   }
