@@ -16,6 +16,7 @@ $api.interceptors.response.use(
   async (error) => {
     const originalRequest = error.config;
     if (error.response.status === 401 && !originalRequest._isRetry) {
+  
       originalRequest._isRetry = true;
       try {
         await axios.get<AuthResponse>(`${BASE_API_URL}/refresh`, {
@@ -31,4 +32,4 @@ $api.interceptors.response.use(
   },
 );
 
-export default $api;
+export default $api
