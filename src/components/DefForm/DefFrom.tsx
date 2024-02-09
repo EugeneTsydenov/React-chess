@@ -1,6 +1,5 @@
 import {
   Box,
-  Button,
   FormControl,
   IconButton,
   InputAdornment,
@@ -14,6 +13,7 @@ import { FormValues } from '../../models/IForm.ts';
 import { inputTheme } from '../../theme/theme';
 import { useForm } from 'react-hook-form';
 import * as React from 'react';
+import MyButton from '../ui/MyButton.tsx';
 
 interface DefFormProps {
   method: (data: {
@@ -45,7 +45,7 @@ const DefForm: React.FC<DefFormProps> = ({ method, name }) => {
 
   return (
     <ThemeProvider theme={inputTheme}>
-      <form method='POST' onSubmit={handleSubmit(onSubmit)}>
+      <form method="POST" onSubmit={handleSubmit(onSubmit)}>
         <Box
           sx={{
             display: 'flex',
@@ -58,9 +58,9 @@ const DefForm: React.FC<DefFormProps> = ({ method, name }) => {
         >
           <TextField
             {...register('email', { required: true })}
-            id='outlined-basic'
-            label='Email'
-            variant='outlined'
+            id="outlined-basic"
+            label="Email"
+            variant="outlined"
             required
             sx={{
               width: '40ch',
@@ -68,9 +68,9 @@ const DefForm: React.FC<DefFormProps> = ({ method, name }) => {
           />
           {name === 'registration' && (
             <TextField
-              id='outlined-basic'
-              label='Username'
-              variant='outlined'
+              id="outlined-basic"
+              label="Username"
+              variant="outlined"
               required
               sx={{
                 width: '40ch',
@@ -84,41 +84,33 @@ const DefForm: React.FC<DefFormProps> = ({ method, name }) => {
               width: '40ch',
               mb: 4,
             }}
-            variant='outlined'
+            variant="outlined"
             required
           >
-            <InputLabel htmlFor='outlined-adornment-password'>Password</InputLabel>
+            <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
             <OutlinedInput
-              id='outlined-adornment-password'
+              id="outlined-adornment-password"
               type={showPassword ? 'text' : 'password'}
               {...register('password', { required: true })}
               required
               endAdornment={
-                <InputAdornment position='end'>
+                <InputAdornment position="end">
                   <IconButton
-                    aria-label='toggle password visibility'
+                    aria-label="toggle password visibility"
                     onClick={handleClickShowPassword}
                     onMouseDown={handleMouseDownPassword}
-                    edge='end'
+                    edge="end"
                   >
                     {showPassword ? <VisibilityOff /> : <Visibility />}
                   </IconButton>
                 </InputAdornment>
               }
-              label='Password'
+              label="Password"
             />
           </FormControl>
-          <Button
-            type='submit'
-            variant='contained'
-            color='secondary'
-            sx={{
-              width: '47ch',
-              mb: '25px',
-            }}
-          >
+          <MyButton width='47ch'>
             {name === 'login' ? 'login' : 'registration'}
-          </Button>
+          </MyButton>
         </Box>
       </form>
     </ThemeProvider>

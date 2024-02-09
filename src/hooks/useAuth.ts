@@ -3,6 +3,7 @@ import { authLocalStorageHelper } from '../helpers/authLocalStorageHelper.ts';
 import AuthService from '../services/AuthService.ts';
 import { authStore } from '../store/store.ts';
 import { AxiosResponse } from 'axios';
+import { AuthResponse } from '../models/response/AuthResponse.ts';
 
 interface IData {
   email: string;
@@ -17,9 +18,10 @@ export function useAuth() {
     mutationFn: (data: IData) => {
       return AuthService.login(data.email, data.password);
     },
-    onSuccess: () => {
-      const { setAuthToLocalStorage } = authLocalStorageHelper();
-      setAuthToLocalStorage();
+    onSuccess: (response: AxiosResponse<AuthResponse>) => {
+      console.log(response.data.accessToken);
+      const { setAccessTokenToLocalStorage } = authLocalStorageHelper();
+      setAccessTokenToLocalStorage(response.data.accessToken);
       authStore.setAuth(true);
     },
     onSettled: async () => {
@@ -27,13 +29,14 @@ export function useAuth() {
     },
   });
 
+
   const registration = useMutation({
     mutationFn: (data: IData) => {
       return AuthService.registration(data.email, data.username!, data.password);
     },
-    onSuccess: () => {
-      const { setAuthToLocalStorage } = authLocalStorageHelper();
-      setAuthToLocalStorage();
+    onSuccess: (response: AxiosResponse<AuthResponse>) => {
+      const { setAccessTokenToLocalStorage } = authLocalStorageHelper();
+      setAccessTokenToLocalStorage(response.data.accessToken);
       authStore.setAuth(true);
     },
     onSettled: async () => {
@@ -45,12 +48,13 @@ export function useAuth() {
     onMutate: () => {
       return AuthService.refresh();
     },
-    onSuccess: () => {
-      const { setAuthToLocalStorage } = authLocalStorageHelper();
-      setAuthToLocalStorage();
+    onSuccess: (response: AxiosResponse<AuthResponse>) => {
+      const { setAccessTokenToLocalStorage } = authLocalStorageHelper();
+      setAccessTokenToLocalStorage(response.data.accessToken);
     },
     onSettled: async () => (
-      await queryClient.invalidateQueries({ queryKey: ['user'] }), authStore.setAuth(true)
+      await queryClient.invalidateQueries({ queryKey: ['user'] }),
+        authStore.setAuth(true)
     ),
     onError: () => {
       queryClient.removeQueries({ queryKey: ['user'] });
@@ -63,8 +67,8 @@ export function useAuth() {
       return AuthService.logout();
     },
     onSettled: async () => {
-      const { removeAuthFromLocalStorage } = authLocalStorageHelper();
-      removeAuthFromLocalStorage();
+      const { removeAccessTokenFromLocalStorage } = authLocalStorageHelper();
+      removeAccessTokenFromLocalStorage();
       authStore.setAuth(false);
       await queryClient.resetQueries({ queryKey: ['user'] });
     },

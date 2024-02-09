@@ -1,22 +1,27 @@
 export function authLocalStorageHelper() {
-  const key = 'isAuth';
-  const value = 'true';
+  const key = 'accessToken';
 
-  function setAuthToLocalStorage() {
+  function setAccessTokenToLocalStorage(value: string) {
     localStorage.setItem(key, value);
   }
 
   function checkAuth() {
-    return localStorage.getItem(key) === value;
+    return localStorage.getItem(key);
   }
 
-  function removeAuthFromLocalStorage() {
+  function removeAccessTokenFromLocalStorage() {
     localStorage.removeItem(key);
   }
 
+  function getAccessTokenFromLocalStorage() {
+    return localStorage.getItem(key)
+  }
+
+
   return {
-    setAuthToLocalStorage,
+    setAccessTokenToLocalStorage,
     checkAuth,
-    removeAuthFromLocalStorage,
+    removeAccessTokenFromLocalStorage,
+    getAccessTokenFromLocalStorage
   };
 }
