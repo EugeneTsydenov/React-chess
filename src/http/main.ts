@@ -1,5 +1,6 @@
 import axios from 'axios';
 import {AuthResponse} from "../models/response/AuthResponse.ts";
+import { authLocalStorageHelper } from '../helpers/authLocalStorageHelper.ts';
 
 export const BASE_API_URL: string = 'http://localhost:52718/api';
 
@@ -10,7 +11,9 @@ const $api = axios.create({
 });
 
 $api.interceptors.request.use(config => {
-  config.headers.Authorization = `Bearer ${localStorage.getItem('accessToken')}`;
+  const {getAccessTokenFromLocalStorage} = authLocalStorageHelper();
+  const accessToken = getAccessTokenFromLocalStorage();
+  config.headers.Authorization = `Bearer ${accessToken}`;
   return config;
 })
 

@@ -4,6 +4,8 @@ import AuthService from '../services/AuthService.ts';
 import { authStore } from '../store/store.ts';
 import { AxiosResponse } from 'axios';
 import { AuthResponse } from '../models/response/AuthResponse.ts';
+import { Simulate } from 'react-dom/test-utils';
+import error = Simulate.error;
 
 interface IData {
   email: string;
@@ -19,7 +21,6 @@ export function useAuth() {
       return AuthService.login(data.email, data.password);
     },
     onSuccess: (response: AxiosResponse<AuthResponse>) => {
-      console.log(response.data.accessToken);
       const { setAccessTokenToLocalStorage } = authLocalStorageHelper();
       setAccessTokenToLocalStorage(response.data.accessToken);
       authStore.setAuth(true);
@@ -50,16 +51,13 @@ export function useAuth() {
     },
     onSuccess: (response: AxiosResponse<AuthResponse>) => {
       const { setAccessTokenToLocalStorage } = authLocalStorageHelper();
+      console.log(response.data.accessToken);
       setAccessTokenToLocalStorage(response.data.accessToken);
     },
     onSettled: async () => (
-      await queryClient.invalidateQueries({ queryKey: ['user'] }),
-        authStore.setAuth(true)
+      authStore.setAuth(true),
+      await queryClient.invalidateQueries({ queryKey: ['user'] })
     ),
-    onError: () => {
-      queryClient.removeQueries({ queryKey: ['user'] });
-      authStore.setAuth(false);
-    },
   });
 
   const logout = useMutation({
@@ -78,6 +76,6 @@ export function useAuth() {
     registration,
     login,
     logout,
-    refresh,
+    refresh
   };
 }
