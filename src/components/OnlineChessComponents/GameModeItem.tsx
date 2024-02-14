@@ -1,14 +1,14 @@
 import * as React from 'react';
 import { Paper, Typography } from '@mui/material';
-import { IMode, IModeValue } from '../../models/IMode.ts';
+import { IMode } from '../../models/IMode.ts';
 
 interface GameModeItem {
   gameMode: IMode;
-  selectedPaper: IModeValue | null;
-  handleClick: (gameModeValue: IModeValue) => void
+  selectedMode: string | null;
+  handleClick: (mode: string) => void
 }
 
-const GameModeItem: React.FC<GameModeItem> = React.memo(({gameMode, selectedPaper, handleClick}) => {
+const GameModeItem: React.FC<GameModeItem> = React.memo(({gameMode, selectedMode, handleClick}) => {
   return (
     <Paper
       sx={{
@@ -17,22 +17,22 @@ const GameModeItem: React.FC<GameModeItem> = React.memo(({gameMode, selectedPape
         cursor: 'pointer',
         display: 'grid',
         placeItems: 'center',
-        opacity: selectedPaper !== gameMode.value ? '0.8' : '1',
-        backgroundColor: selectedPaper === gameMode.value ? 'primary.light' : 'primary'
+        opacity: selectedMode !== gameMode.serverMode ? '0.8' : '1',
+        backgroundColor: selectedMode === gameMode.serverMode ? 'primary.light' : 'primary'
       }}
       onClick={() => {
-        handleClick(gameMode.value)
+        handleClick(gameMode.serverMode)
       }}
     >
       <Typography
         variant='h5'
       >
-        {gameMode.mode}
+        {gameMode.clientMode}
       </Typography>
       <Typography
         variant='h5'
       >
-        {gameMode.time}
+        {gameMode.clientTime}
       </Typography>
     </Paper>
   );
