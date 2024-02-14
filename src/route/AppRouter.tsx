@@ -11,7 +11,7 @@ import LoginPage from '../pages/LoginPage/LoginPage.tsx';
 import TaskPage from '../pages/TasksPages/TaskPage.tsx';
 import PlayPage from '../pages/PlayPages/PlayPage.tsx';
 import ProtectedRoute from './ProtectedRoute.tsx';
-import { authStore } from '../store/store.ts';
+import { authStore } from '../store/authStore.ts';
 import HomePage from '../pages/HomePage.tsx';
 import { observer } from 'mobx-react-lite';
 import * as React from 'react';
@@ -26,7 +26,9 @@ const AppRouter: React.FC = observer(() => {
         <Route path='play'>
           <Route index element={<PlayPage />} />
           <Route element={<ProtectedRoute isAuth={isAuth} />}>
-            <Route path='online' element={<OnlineChessPage />} />
+            <Route path='online' element={<OnlineChessPage />}>
+              <Route path=':id' element={<PlayPage/>}/>
+            </Route>
             <Route path='friend' element={<FriendChessPage />} />
           </Route>
           <Route path='offline' element={<BotChessPage />} />
