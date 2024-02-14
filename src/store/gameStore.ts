@@ -5,6 +5,7 @@ class GameStore {
   isConfirmed = false;
   isStartGame = false;
   isWaitingEnemy = false;
+  roomId = '';
 
   constructor() {
     makeAutoObservable(this)
@@ -24,6 +25,10 @@ class GameStore {
 
   setWaitingEnemy(bool: boolean) {
     this.isWaitingEnemy = bool
+  }
+
+  setRoomId(roomId: string) {
+    this.roomId = roomId
   }
 }
 

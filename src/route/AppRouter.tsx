@@ -17,18 +17,14 @@ import { observer } from 'mobx-react-lite';
 import * as React from 'react';
 
 const AppRouter: React.FC = observer(() => {
-  const isAuth = authStore.isAuth;
-
   return (
     <Router>
       <Routes>
         <Route path='/' element={<HomePage />} />
         <Route path='play'>
           <Route index element={<PlayPage />} />
-          <Route element={<ProtectedRoute isAuth={isAuth} />}>
-            <Route path='online' element={<OnlineChessPage />}>
-              <Route path=':id' element={<PlayPage/>}/>
-            </Route>
+          <Route element={<ProtectedRoute isAuth={authStore.isAuth}/>}>
+            <Route path='online' element={<OnlineChessPage />}/>
             <Route path='friend' element={<FriendChessPage />} />
           </Route>
           <Route path='offline' element={<BotChessPage />} />
@@ -37,11 +33,14 @@ const AppRouter: React.FC = observer(() => {
         <Route path='tasks' element={<TaskPage />} />
         <Route path='education' element={<EducationPage />} />
         <Route path='viewing' element={<ViewingPage />} />
+        <Route element={<ProtectedRoute isAuth={authStore.isAuth}/>}>
+          <Route path='game/:id' element={<PlayPage/>}/>
+        </Route>
         <Route path='community' element={<CommunityPage />} />
         <Route path='instruments' element={<InstrumentsPage />} />
-        <Route element={<ProtectedRoute isAuth={!isAuth} />}>
+        <Route element={<ProtectedRoute isAuth={!authStore.isAuth}/>}>
           <Route path='login' element={<LoginPage />} />
-          <Route path='registration' element={<RegistrationPage />} />
+          <Route path='registration' element={<RegistrationPage/>} />
         </Route>
       </Routes>
     </Router>

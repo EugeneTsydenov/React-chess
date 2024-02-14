@@ -6,10 +6,13 @@ import { observer } from 'mobx-react-lite';
 import { gameStore } from '../../store/gameStore.ts';
 import GameSearch from '../../components/OnlineChessComponents/GameSearch.tsx';
 import GameConfirm from '../../components/OnlineChessComponents/GameConfirm.tsx';
-import Game from '../../components/OnlineChessComponents/Game.tsx';
 import WaitingEnemy from '../../components/OnlineChessComponents/WaitingEnemy.tsx';
+import { Navigate } from 'react-router-dom';
 
 const OnlineChessPage: React.FC = observer(() => {
+  if(gameStore.isStartGame) {
+    return <Navigate to={`/game/${gameStore.roomId}`}/>
+  }
   return (
     <Layout>
       <Container maxWidth='lg'>
@@ -51,10 +54,6 @@ const OnlineChessPage: React.FC = observer(() => {
                   </Typography>
                   <GameModeSelector/>
                 </>
-            }
-            {
-              gameStore.isStartGame &&
-                <Game/>
             }
           </Box>
         </Box>

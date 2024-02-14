@@ -2,7 +2,7 @@ import { authLocalStorageHelper } from './authLocalStorageHelper.ts';
 import client from '../http/colyseus.ts';
 import { Room } from 'colyseus.js';
 import { gameStore } from '../store/gameStore.ts';
-import { useNavigate } from 'react-router-dom';
+import { gameLocalStorageHelper } from './gameLocalStorageHelper.ts';
 
 export class GameColyseusHelper {
   public room: Room | null = null;
@@ -21,14 +21,15 @@ export class GameColyseusHelper {
     try {
       const accessToken = this.getAccessToken();
       this.room = await client.joinOrCreate(mode, { mode, accessToken });
-      console.log(this.room);
-      this.room.onMessage('start search game', () => {
-        gameStore.setSearch(true);
-      })
-      this.room.onMessage('confirm game', () => {
-        gameStore.setSearch(false)
-        gameStore.setConfirmed(true)
-      })
+      if(this.room) {
+        this.room.onMessage('start search game', () => {
+          gameStore.setSearch(true);
+        })
+        this.room.onMessage('confirm game', () => {
+          gameStore.setSearch(false)
+          gameStore.setConfirmed(true)
+        })
+      }
     } catch (e) {
       console.log(e);
     }
@@ -54,9 +55,15 @@ export class GameColyseusHelper {
 
   private async startGame() {
     try {
+      if(!this.room) {
+        throw new Error('User is not in the room')
+      }
       gameStore.setConfirmed(false);
       gameStore.setWaitingEnemy(false);
       gameStore.setStartGame(true);
+      gameStore.setRoomId(this.room.roomId)
+      const {setRoomIdToLocalStorage} = gameLocalStorageHelper();
+      setRoomIdToLocalStorage(this.room.roomId)
     } catch (e) {
       console.log(e);
     }
