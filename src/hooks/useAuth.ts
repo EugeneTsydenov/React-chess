@@ -1,11 +1,9 @@
 import { useMutation, UseMutationResult, useQueryClient } from '@tanstack/react-query';
 import { authLocalStorageHelper } from '../helpers/authLocalStorageHelper.ts';
 import AuthService from '../services/AuthService.ts';
-import { authStore } from '../store/store.ts';
+import { authStore } from '../store/authStore.ts';
 import { AxiosResponse } from 'axios';
 import { AuthResponse } from '../models/response/AuthResponse.ts';
-import { Simulate } from 'react-dom/test-utils';
-import error = Simulate.error;
 
 interface IData {
   email: string;
