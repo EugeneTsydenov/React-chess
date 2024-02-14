@@ -1,6 +1,6 @@
 import { AppBar, Container, Toolbar, Typography } from '@mui/material';
 import MobileMenu from '../MobileMenu/MobileMenu.tsx';
-import { authStore } from '../../store/store.ts';
+import { authStore } from '../../store/authStore.ts';
 import User from '../UserComponents/User.tsx';
 import { observer } from 'mobx-react-lite';
 import NavBar from '../NavBar/Navbar.tsx';
