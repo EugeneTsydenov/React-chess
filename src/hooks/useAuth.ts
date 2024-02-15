@@ -51,9 +51,9 @@ export function useAuth() {
       const { setAccessTokenToLocalStorage } = authLocalStorageHelper();
       console.log(response.data.accessToken);
       setAccessTokenToLocalStorage(response.data.accessToken);
+      authStore.setAuth(true)
     },
     onSettled: async () => (
-      authStore.setAuth(true),
       await queryClient.invalidateQueries({ queryKey: ['user'] })
     ),
   });
