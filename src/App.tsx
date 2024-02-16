@@ -8,10 +8,9 @@ import './styles/App.css';
 const App: React.FC = observer(() => {
   const { refresh } = useAuth();
 
-  const { checkAuth } = authLocalStorageHelper();
-  const isAuth = checkAuth();
-
   React.useEffect(() => {
+    const { checkAuth } = authLocalStorageHelper();
+    const isAuth = checkAuth();
     if (isAuth) {
       refresh.mutate({});
     }
