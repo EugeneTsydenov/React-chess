@@ -1,4 +1,4 @@
-import LoginForm from '../../components/LoginForm/LoginForm.tsx';
+import LoginForm from '../../components/login-form/LoginForm.tsx';
 import AuthLayout from '../../layouts/AuthLayout.tsx';
 import * as React from 'react';
 

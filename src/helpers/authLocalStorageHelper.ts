@@ -14,14 +14,13 @@ export function authLocalStorageHelper() {
   }
 
   function getAccessTokenFromLocalStorage() {
-    return localStorage.getItem(key)
+    return localStorage.getItem(key);
   }
-
 
   return {
     setAccessTokenToLocalStorage,
     checkAuth,
     removeAccessTokenFromLocalStorage,
-    getAccessTokenFromLocalStorage
+    getAccessTokenFromLocalStorage,
   };
 }

@@ -1,4 +1,4 @@
-import Header from '../components/Header/Header.tsx';
+import Header from '../components/header/Header.tsx';
 import * as React from 'react';
 
 interface LayoutProps {

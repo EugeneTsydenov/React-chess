@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
-import MyButton from '../ui/MyButton.tsx';
+import gameColyseusHelper from '../../helpers/gameColyseusHelper.ts';
 import { Box, ThemeProvider } from '@mui/material';
 import { inputTheme } from '../../theme/theme.ts';
 import gameModes from '../../data/GameModes.ts';
 import GameModeItem from './GameModeItem.tsx';
-import gameColyseusHelper from '../../helpers/gameColyseusHelper.ts';
+import MyButton from '../ui/MyButton.tsx';
+import React, { useState } from 'react';
 
 const GameModeSelector: React.FC = () => {
   const [selectedMode, setSelectedMode] = useState<string | null>(null);
@@ -33,11 +33,15 @@ const GameModeSelector: React.FC = () => {
             handleClick={handleClick}
           />
         ))}
-        <MyButton width="95%" height="95%" onClick={async () => {
-          if(selectedMode) {
-            await gameColyseusHelper.findGame(selectedMode);
-          }
-        }}>
+        <MyButton
+          width='95%'
+          height='95%'
+          onClick={async () => {
+            if (selectedMode) {
+              await gameColyseusHelper.findGame(selectedMode);
+            }
+          }}
+        >
           Find your opponent
         </MyButton>
       </Box>

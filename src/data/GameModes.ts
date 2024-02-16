@@ -1,6 +1,6 @@
 import { IMode } from '../models/IMode.ts';
 
-const gameModes:IMode[] = [
+const gameModes: IMode[] = [
   {
     clientMode: 'Bullet',
     clientTime: '1+0',
@@ -55,7 +55,7 @@ const gameModes:IMode[] = [
     clientMode: 'Classical',
     clientTime: '30+20',
     serverMode: 'classical',
-  }
+  },
 ];
 
 export default gameModes;

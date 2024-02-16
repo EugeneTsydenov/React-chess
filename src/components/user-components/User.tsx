@@ -28,7 +28,7 @@ const User: React.FC = observer(() => {
       {isLoading || data === undefined ? (
         <>
           <Skeleton animation='wave' variant='circular' width={40} height={40} />
-          <Skeleton width={50}/>
+          <Skeleton width={50} />
         </>
       ) : (
         <>

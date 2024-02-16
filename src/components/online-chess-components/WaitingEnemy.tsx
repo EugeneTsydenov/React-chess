@@ -1,6 +1,6 @@
-import * as React from 'react';
 import { Paper, ThemeProvider, Typography } from '@mui/material';
 import { inputTheme } from '../../theme/theme.ts';
+import * as React from 'react';
 
 const WaitingEnemy: React.FC = () => {
   return (
@@ -13,14 +13,11 @@ const WaitingEnemy: React.FC = () => {
           justifyContent: 'center',
           gap: 5,
           padding: 5,
-          borderRadius: '15px'
+          borderRadius: '15px',
         }}
         elevation={3}
       >
-        <Typography
-          component='h3'
-          variant='h5'
-        >
+        <Typography component='h3' variant='h5'>
           We wait until the enemy confirms
         </Typography>
       </Paper>

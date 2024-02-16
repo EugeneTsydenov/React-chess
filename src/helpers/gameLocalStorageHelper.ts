@@ -14,14 +14,13 @@ export function gameLocalStorageHelper() {
   }
 
   function getRoomIdFromLocalStorage() {
-    return localStorage.getItem(key)
+    return localStorage.getItem(key);
   }
-
 
   return {
     setRoomIdToLocalStorage,
     checkUserPlaying,
     removeRoomIdFromLocalStorage,
-    getRoomIdFromLocalStorage
+    getRoomIdFromLocalStorage,
   };
 }

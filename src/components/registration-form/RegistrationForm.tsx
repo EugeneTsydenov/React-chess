@@ -1,6 +1,6 @@
 import { FormValues } from '../../models/IForm.ts';
+import DefFrom from '../default-form/DefFrom.tsx';
 import { useAuth } from '../../hooks/useAuth.ts';
-import DefFrom from '../DefForm/DefFrom.tsx';
 import { observer } from 'mobx-react-lite';
 import * as React from 'react';
 

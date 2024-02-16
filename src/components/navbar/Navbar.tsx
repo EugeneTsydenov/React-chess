@@ -1,4 +1,4 @@
-import NavBarItem from '../NavBarItem/NavBarItem.tsx';
+import NavBarItem from '../navbar-item/NavBarItem.tsx';
 import { links } from '../../data/NavLinks.js';
 import { Links } from '../../models/Links.ts';
 import { Box, MenuList } from '@mui/material';

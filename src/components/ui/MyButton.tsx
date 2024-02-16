@@ -15,7 +15,7 @@ const MyButton: React.FC<ButtonProps> = ({ children, width, height, onClick }) =
       color='secondary'
       sx={{
         width: width,
-        height: height
+        height: height,
       }}
       onClick={onClick}
     >

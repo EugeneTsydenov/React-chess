@@ -1,9 +1,9 @@
 import { AppBar, Container, Toolbar, Typography } from '@mui/material';
-import MobileMenu from '../MobileMenu/MobileMenu.tsx';
-import { authStore } from '../../store/authStore.ts';
-import User from '../UserComponents/User.tsx';
+import MobileMenu from '../mobile-menu/MobileMenu.tsx';
+import { authStore } from '../../store/auth-store.ts';
+import User from '../user-components/User.tsx';
 import { observer } from 'mobx-react-lite';
-import NavBar from '../NavBar/Navbar.tsx';
+import NavBar from '../navbar/Navbar.tsx';
 import { Link } from 'react-router-dom';
 import * as React from 'react';
 

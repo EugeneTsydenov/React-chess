@@ -1,13 +1,13 @@
-import { gameStore } from '../store/gameStore.ts';
 import { Piece, Square } from 'react-chessboard/dist/chessboard/types';
 import gameColyseusHelper from './gameColyseusHelper.ts';
+import { gameStore } from '../store/game-store.ts';
 
 interface IDragPiece {
   piece: Piece;
-  sourceSquare: Square
+  sourceSquare: Square;
 }
 
-export function isDraggablePiece({piece}: IDragPiece) {
+export function isDraggablePiece({ piece }: IDragPiece) {
   return gameStore.userColor === piece[0];
 }
 

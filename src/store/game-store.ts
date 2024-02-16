@@ -1,5 +1,4 @@
 import { makeAutoObservable } from 'mobx';
-import { Square } from 'react-chessboard/dist/chessboard/types';
 
 class GameStore {
   isSearch = false;
@@ -14,17 +13,16 @@ class GameStore {
   isCheck: boolean = false;
   isCheckmate: boolean = false;
   isGameOver: boolean = false;
-  kingSquareInCheck: Square | null = null
   constructor() {
-    makeAutoObservable(this)
+    makeAutoObservable(this);
   }
 
   setSearch(bool: boolean) {
-    this.isSearch = bool
+    this.isSearch = bool;
   }
 
   setConfirmed(bool: boolean) {
-    this.isConfirmed = bool
+    this.isConfirmed = bool;
   }
 
   setStartGame(bool: boolean) {
@@ -32,43 +30,39 @@ class GameStore {
   }
 
   setWaitingEnemy(bool: boolean) {
-    this.isWaitingEnemy = bool
+    this.isWaitingEnemy = bool;
   }
 
   setRoomId(roomId: string) {
-    this.roomId = roomId
+    this.roomId = roomId;
   }
 
   setEnemyId(enemyId: number) {
-    this.enemyId = enemyId
+    this.enemyId = enemyId;
   }
 
   setGameFen(gameFen: string) {
-    this.gameFen = gameFen
+    this.gameFen = gameFen;
   }
 
   setUserColor(userColor: 'w' | 'b' | '') {
-    this.userColor = userColor
+    this.userColor = userColor;
   }
 
   setTurn(turn: 'w' | 'b' | '') {
-    this.turn = turn
+    this.turn = turn;
   }
 
   setCheck(bool: boolean) {
-    this.isCheck = bool
+    this.isCheck = bool;
   }
 
   setCheckmate(bool: boolean) {
-    this.isCheckmate = bool
+    this.isCheckmate = bool;
   }
 
   setGameOver(bool: boolean) {
-    this.isGameOver = bool
-  }
-
-  setKingSquareInCheck(square: Square | null) {
-    this.kingSquareInCheck = square
+    this.isGameOver = bool;
   }
 }
 
