@@ -14,7 +14,7 @@ class GameStore {
   isCheck: boolean = false;
   isCheckmate: boolean = false;
   isGameOver: boolean = false;
-  kingSquareInCheck: Square | '' = ''
+  kingSquareInCheck: Square | null = null
   constructor() {
     makeAutoObservable(this)
   }
@@ -53,6 +53,22 @@ class GameStore {
 
   setTurn(turn: 'w' | 'b' | '') {
     this.turn = turn
+  }
+
+  setCheck(bool: boolean) {
+    this.isCheck = bool
+  }
+
+  setCheckmate(bool: boolean) {
+    this.isCheckmate = bool
+  }
+
+  setGameOver(bool: boolean) {
+    this.isGameOver = bool
+  }
+
+  setKingSquareInCheck(square: Square | null) {
+    this.kingSquareInCheck = square
   }
 }
 

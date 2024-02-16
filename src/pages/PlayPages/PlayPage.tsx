@@ -4,8 +4,16 @@ import { gameStore } from '../../store/gameStore.ts';
 import { observer } from 'mobx-react-lite';
 import { Box, Container } from '@mui/material';
 import { Chessboard } from 'react-chessboard';
+import { Navigate, useParams } from 'react-router-dom';
+import { isDraggablePiece, onDrop } from '../../helpers/dragNDropHelper.ts';
 
 const PlayPage: React.FC = observer(() => {
+  const params = useParams();
+
+  if(params.id !== gameStore.roomId) {
+    return <Navigate to='/'/>
+  }
+
   return (
     <Layout>
       <Container maxWidth='lg'>
@@ -29,6 +37,8 @@ const PlayPage: React.FC = observer(() => {
               position={gameStore.gameFen}
               showBoardNotation={true}
               boardOrientation={gameStore.userColor === 'w' ? 'white' : 'black'}
+              isDraggablePiece={isDraggablePiece}
+              onPieceDrop={onDrop}
             />
           </Box>
         </Box>

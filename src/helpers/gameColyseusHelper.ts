@@ -4,6 +4,8 @@ import { Room } from 'colyseus.js';
 import { gameStore } from '../store/gameStore.ts';
 import { gameLocalStorageHelper } from './gameLocalStorageHelper.ts';
 import { IStartGame } from '../models/IStartGame.ts';
+import { IMoveData } from '../models/IMoveData.ts';
+import { IMovedData } from '../models/IMovedData.ts';
 
 export class GameColyseusHelper {
   public room: Room | null = null;
@@ -79,9 +81,40 @@ export class GameColyseusHelper {
       gameStore.setGameFen(payload.gameFen);
       gameStore.setUserColor(payload.playerColor);
       gameStore.setTurn(payload.turn);
+      this.onMessage()
     } catch (e) {
       console.log(e);
     }
+  }
+
+  move(moveData: IMoveData) {
+    if(!this.room) {
+      throw new Error('User is not in the room')
+    }
+    this.room.send('move', {
+      moveData
+    });
+  }
+
+  moved() {
+    if (!this.room) {
+      throw new Error('User is not in the room')
+    }
+    this.room.onMessage('moved', (gameData: IMovedData) => {
+      gameStore.setGameFen(gameData.fen);
+      gameStore.setTurn(gameData.turn);
+      gameStore.setCheck(gameData.isCheck);
+      gameStore.setCheckmate(gameData.isCheckmate);
+      gameStore.setGameOver(gameData.isGameOver);
+      gameStore.setKingSquareInCheck(gameData.kingSquareInCheck);
+    })
+  }
+
+  onMessage() {
+    if(!this.room) {
+      throw new Error('User is not in the room')
+    }
+    this.moved()
   }
 }
 
