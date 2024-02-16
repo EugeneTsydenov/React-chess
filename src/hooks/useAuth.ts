@@ -47,15 +47,15 @@ export function useAuth() {
     onMutate: () => {
       return AuthService.refresh();
     },
-    onSuccess: (response: AxiosResponse<AuthResponse>) => {
-      const { setAccessTokenToLocalStorage } = authLocalStorageHelper();
-      console.log(response.data.accessToken);
-      setAccessTokenToLocalStorage(response.data.accessToken);
-      authStore.setAuth(true)
-    },
-    onSettled: async () => (
-      await queryClient.invalidateQueries({ queryKey: ['user'] })
-    ),
+    onError: async (error, variables, context) => {
+      if(context && context.status === 200) {
+        const { setAccessTokenToLocalStorage } = authLocalStorageHelper();
+        console.log(context.data.accessToken);
+        setAccessTokenToLocalStorage(context.data.accessToken);
+        authStore.setAuth(true)
+        await queryClient.invalidateQueries({ queryKey: ['user'] })
+      }
+    }
   });
 
   const logout = useMutation({
