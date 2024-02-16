@@ -3,6 +3,7 @@ import client from '../http/colyseus.ts';
 import { Room } from 'colyseus.js';
 import { gameStore } from '../store/gameStore.ts';
 import { gameLocalStorageHelper } from './gameLocalStorageHelper.ts';
+import { IStartGame } from '../models/IStartGame.ts';
 
 export class GameColyseusHelper {
   public room: Room | null = null;
@@ -35,6 +36,15 @@ export class GameColyseusHelper {
     }
   }
 
+  public async cancelSearch() {
+    if(!this.room) {
+      throw new Error('User is not in the room')
+    }
+
+    await this.room.leave(true)
+    gameStore.setSearch(false)
+  }
+
   public async confirmGame() {
     try {
       if(!this.room) {
@@ -45,38 +55,33 @@ export class GameColyseusHelper {
         gameStore.setConfirmed(false);
         gameStore.setWaitingEnemy(true)
       })
-      this.room.onMessage('start game', () => {
-        this.startGame()
+      this.room.onMessage('start game', (payload: IStartGame) => {
+        gameStore.setEnemyId(payload.enemy)
+        this.startGame(payload)
       })
     } catch (e) {
       console.log(e);
     }
   }
 
-  private async startGame() {
+  private async startGame(payload: IStartGame) {
     try {
       if(!this.room) {
         throw new Error('User is not in the room')
       }
+      const {setRoomIdToLocalStorage} = gameLocalStorageHelper();
+      setRoomIdToLocalStorage(this.room.roomId);
       gameStore.setConfirmed(false);
       gameStore.setWaitingEnemy(false);
       gameStore.setStartGame(true);
       gameStore.setRoomId(this.room.roomId)
-      const {setRoomIdToLocalStorage} = gameLocalStorageHelper();
-      setRoomIdToLocalStorage(this.room.roomId)
+      gameStore.setEnemyId(payload.enemy);
+      gameStore.setGameFen(payload.gameFen);
+      gameStore.setUserColor(payload.playerColor);
+      gameStore.setTurn(payload.turn);
     } catch (e) {
       console.log(e);
     }
-  }
-
-  public async cancelSearch() {
-    console.log('cancel');
-    if(!this.room) {
-      throw new Error('User is not in the room')
-    }
-
-    await this.room.leave(true)
-    gameStore.setSearch(false)
   }
 }
 
