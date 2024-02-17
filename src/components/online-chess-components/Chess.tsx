@@ -5,6 +5,7 @@ import { observer } from 'mobx-react-lite';
 import * as React from 'react';
 
 const Chess: React.FC = observer(() => {
+  console.log(gameStore.kingSquareIsInCheck);
   return (
     <Chessboard
       position={gameStore.gameFen}
@@ -12,6 +13,13 @@ const Chess: React.FC = observer(() => {
       boardOrientation={gameStore.userColor === 'w' ? 'white' : 'black'}
       isDraggablePiece={isDraggablePiece}
       onPieceDrop={onDrop}
+      customSquareStyles={{
+        [gameStore.kingSquareIsInCheck]: {
+          backgroundColor: 'rgba(255, 0, 0, 0.3)',
+          boxShadow: '0 0 20px rgba(255, 0, 0, 0.7)',
+          borderRadius: '50%'
+        }
+      }}
     />
   );
 });
