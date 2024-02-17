@@ -4,10 +4,10 @@ import { inputTheme } from '../../theme/theme.ts';
 import gameModes from '../../data/GameModes.ts';
 import GameModeItem from './GameModeItem.tsx';
 import MyButton from '../ui/MyButton.tsx';
-import React, { useState } from 'react';
+import React from 'react';
 
 const GameModeSelector: React.FC = () => {
-  const [selectedMode, setSelectedMode] = useState<string | null>(null);
+  const [selectedMode, setSelectedMode] = React.useState<string | null>(null);
 
   const handleClick = (mode: string) => {
     setSelectedMode(mode);

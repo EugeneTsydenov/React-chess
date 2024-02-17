@@ -1,5 +1,7 @@
 import { AuthLocalStorageHelper } from '../helpers/authLocalStorageHelper.ts';
 import { matchmakingStore } from '../store/matchmaking-store.ts';
+import { Square } from 'react-chessboard/dist/chessboard/types';
+import { IAvailableMoves } from '../models/IAvailableMoves.ts';
 import { IStartGame } from '../models/IStartGame.ts';
 import { IMovedData } from '../models/IMovedData.ts';
 import { gameStore } from '../store/game-store.ts';
@@ -94,6 +96,25 @@ class GameRoom {
 
   moved(gameData: IMovedData) {
     gameStore.moved(gameData);
+  }
+
+  async getAvailableMoves(square: Square | null) {
+    return new Promise<IAvailableMoves>((resolve) => {
+      if (!this.room) {
+        throw new Error('User is not in the room');
+      }
+      this.room.send('get moves', {
+        square,
+      });
+
+      this.room.onMessage('available moves', (payload: IAvailableMoves) => {
+        resolve({
+          availableMoves: payload.availableMoves,
+          color: payload.color,
+          pieces: payload.pieces,
+        });
+      });
+    });
   }
 }
 

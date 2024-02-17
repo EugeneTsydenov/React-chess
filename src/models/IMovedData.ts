@@ -6,5 +6,5 @@ export interface IMovedData {
   isCheck: boolean;
   isCheckmate: boolean;
   isGameOver: boolean;
-  kingSquareIsInCheck: Square | ''
+  kingSquareIsInCheck: Square | '';
 }

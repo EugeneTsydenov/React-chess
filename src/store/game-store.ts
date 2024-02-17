@@ -1,7 +1,7 @@
+import { Square } from 'react-chessboard/dist/chessboard/types';
 import { IStartGame } from '../models/IStartGame.ts';
 import { IMovedData } from '../models/IMovedData.ts';
 import { makeAutoObservable } from 'mobx';
-import { Square } from 'react-chessboard/dist/chessboard/types';
 
 class GameStore {
   enemyId: number | null = null;
@@ -11,7 +11,7 @@ class GameStore {
   isCheck: boolean = false;
   isCheckmate: boolean = false;
   isGameOver: boolean = false;
-  kingSquareIsInCheck: Square | '' = ''
+  kingSquareIsInCheck: Square | '' = '';
   constructor() {
     makeAutoObservable(this);
   }
@@ -45,7 +45,7 @@ class GameStore {
   }
 
   setKingSquareIsInCheck(kingSquare: Square | '') {
-    this.kingSquareIsInCheck = kingSquare
+    this.kingSquareIsInCheck = kingSquare;
   }
 
   public startGame(payload: IStartGame) {
@@ -61,7 +61,7 @@ class GameStore {
     this.setCheck(gameData.isCheck);
     this.setCheckmate(gameData.isCheckmate);
     this.setGameOver(gameData.isGameOver);
-    this.setKingSquareIsInCheck(gameData.kingSquareIsInCheck)
+    this.setKingSquareIsInCheck(gameData.kingSquareIsInCheck);
   }
 }
 
