@@ -4,6 +4,7 @@ import { IMovedData } from '../models/IMovedData.ts';
 import { makeAutoObservable } from 'mobx';
 
 class GameStore {
+  move: string | null | undefined;
   enemyId: number | null = null;
   gameFen: string = '';
   userColor: 'w' | 'b' | '' = '';
@@ -48,6 +49,10 @@ class GameStore {
     this.kingSquareIsInCheck = kingSquare;
   }
 
+  setMove(move: string | null) {
+    this.move = move;
+  }
+
   public startGame(payload: IStartGame) {
     this.setEnemyId(payload.enemy);
     this.setGameFen(payload.gameFen);
@@ -62,6 +67,7 @@ class GameStore {
     this.setCheckmate(gameData.isCheckmate);
     this.setGameOver(gameData.isGameOver);
     this.setKingSquareIsInCheck(gameData.kingSquareIsInCheck);
+    this.setMove(gameData.move);
   }
 }
 

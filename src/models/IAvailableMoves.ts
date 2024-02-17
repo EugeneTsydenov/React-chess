@@ -2,11 +2,11 @@ import { Square } from 'react-chessboard/dist/chessboard/types';
 
 export interface IAvailableMoves {
   availableMoves: IMove[];
-  color: 'w' | 'b';
-  pieces: IPieces[];
+  squareData: IPiece;
+  pieces: IPiece[];
 }
 
-interface IPieces {
+interface IPiece {
   type: string;
   color: 'w' | 'b';
 }

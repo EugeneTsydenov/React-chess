@@ -110,7 +110,7 @@ class GameRoom {
       this.room.onMessage('available moves', (payload: IAvailableMoves) => {
         resolve({
           availableMoves: payload.availableMoves,
-          color: payload.color,
+          squareData: payload.squareData,
           pieces: payload.pieces,
         });
       });

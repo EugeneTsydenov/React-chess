@@ -1,8 +1,8 @@
 import { Piece, Square } from 'react-chessboard/dist/chessboard/types';
-import { paintSquare } from '../../helpers/paintSquareHelper.ts';
-import { CSSProperties, Dispatch, SetStateAction } from 'react';
+import { paintSquareHelper } from '../../helpers/paintSquareHelper.ts';
+import { useClickSquare } from '../../hooks/useClickSquare.ts';
+import { moveHelper } from '../../helpers/moveHelper.ts';
 import { gameStore } from '../../store/game-store.ts';
-import { gameRoom } from '../../rooms/game-room.ts';
 import { Chessboard } from 'react-chessboard';
 import { observer } from 'mobx-react-lite';
 import * as React from 'react';
@@ -14,40 +14,12 @@ interface IDragPiece {
 
 const Chess: React.FC = observer(() => {
   const [availableMoves, setAvailableMoves] = React.useState({});
+  const { onSquareClick } = useClickSquare(setAvailableMoves);
 
-  React.useEffect(() => {
-    const handleMouseDown = () => {
-      setAvailableMoves([]);
-    };
-
-    document.addEventListener('mousedown', handleMouseDown);
-    return () => {
-      document.removeEventListener('mousedown', handleMouseDown);
-    };
-  }, []);
-
-  function isDraggablePiece({ piece }: IDragPiece) {
-    return gameStore.userColor === piece[0];
-  }
-
-  function onDrop(sourceSquare: Square, targetSquare: Square, piece: Piece) {
-    gameRoom.move({
-      from: sourceSquare,
-      to: targetSquare,
-      promotion: piece[1].toLowerCase() ?? 'q',
-    });
-
-    return true;
-  }
-
-  async function onDragBegin(
-    piece: Piece,
-    sourceSquare: Square,
-    setAvailableMoves: Dispatch<SetStateAction<{ [square: string]: CSSProperties }>>,
-  ) {
+  async function onDragBegin(sourceSquare: Square) {
     if (sourceSquare === null) return false;
 
-    const newSquares = await paintSquare(sourceSquare, 'drag');
+    const { newSquares } = await paintSquareHelper(sourceSquare, false);
 
     if (newSquares) {
       setAvailableMoves(newSquares);
@@ -57,22 +29,16 @@ const Chess: React.FC = observer(() => {
     return false;
   }
 
-  function onDragEnd(
-    setAvailableMoves: Dispatch<SetStateAction<{ [square: string]: CSSProperties }>>,
-  ) {
+  function onDragEnd() {
     setAvailableMoves({});
   }
 
-  async function onSquareClick(square: Square) {
-    if (square === null) {
-      setAvailableMoves({});
-    }
+  function isDraggablePiece({ piece }: IDragPiece) {
+    return gameStore.userColor === piece[0];
+  }
 
-    const newSquares = await paintSquare(square, 'click');
-
-    if (newSquares) {
-      setAvailableMoves(newSquares);
-    }
+  function onDrop(sourceSquare: Square, targetSquare: Square, piece: Piece) {
+    return moveHelper(sourceSquare, targetSquare, piece[1]);
   }
 
   return (
@@ -89,15 +55,11 @@ const Chess: React.FC = observer(() => {
         },
         ...availableMoves,
       }}
-      onPieceDragBegin={async (piece: Piece, sourceSquare) => {
-        await onDragBegin(piece, sourceSquare, setAvailableMoves);
+      onPieceDragBegin={async (_, sourceSquare) => {
+        await onDragBegin(sourceSquare);
       }}
-      onPieceDragEnd={() => {
-        onDragEnd(setAvailableMoves);
-      }}
-      onSquareClick={async (square: Square) => {
-        await onSquareClick(square);
-      }}
+      onPieceDragEnd={onDragEnd}
+      onSquareClick={onSquareClick}
     />
   );
 });
