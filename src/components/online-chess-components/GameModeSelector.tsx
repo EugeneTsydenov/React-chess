@@ -1,4 +1,4 @@
-import gameColyseusHelper from '../../helpers/gameColyseusHelper.ts';
+import { gameRoom } from '../../rooms/game-room.ts';
 import { Box, ThemeProvider } from '@mui/material';
 import { inputTheme } from '../../theme/theme.ts';
 import gameModes from '../../data/GameModes.ts';
@@ -38,7 +38,7 @@ const GameModeSelector: React.FC = () => {
           height='95%'
           onClick={async () => {
             if (selectedMode) {
-              await gameColyseusHelper.findGame(selectedMode);
+              await gameRoom.findGame(selectedMode);
             }
           }}
         >

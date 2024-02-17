@@ -1,5 +1,5 @@
 import { LinearProgress, Paper, ThemeProvider, Typography } from '@mui/material';
-import gameColyseusHelper from '../../helpers/gameColyseusHelper.ts';
+import { gameRoom } from '../../rooms/game-room.ts';
 import { inputTheme } from '../../theme/theme.ts';
 import MyButton from '../ui/MyButton.tsx';
 import * as React from 'react';
@@ -26,7 +26,7 @@ const GameSearch: React.FC = () => {
         <MyButton
           width='100%'
           onClick={async () => {
-            await gameColyseusHelper.cancelSearch();
+            await gameRoom.cancelSearch();
           }}
         >
           Cancel search

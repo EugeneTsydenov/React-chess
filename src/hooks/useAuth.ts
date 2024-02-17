@@ -1,5 +1,5 @@
 import { useMutation, UseMutationResult, useQueryClient } from '@tanstack/react-query';
-import { authLocalStorageHelper } from '../helpers/authLocalStorageHelper.ts';
+import { AuthLocalStorageHelper } from '../helpers/authLocalStorageHelper.ts';
 import { AuthResponse } from '../models/response/AuthResponse.ts';
 import AuthService from '../services/auth-service.ts';
 import { authStore } from '../store/auth-store.ts';
@@ -19,8 +19,7 @@ export function useAuth() {
       return AuthService.login(data.email, data.password);
     },
     onSuccess: (response: AxiosResponse<AuthResponse>) => {
-      const { setAccessTokenToLocalStorage } = authLocalStorageHelper();
-      setAccessTokenToLocalStorage(response.data.accessToken);
+      AuthLocalStorageHelper.setAccessTokenToLocalStorage(response.data.accessToken);
       authStore.setAuth(true);
     },
     onSettled: async () => {
@@ -33,8 +32,7 @@ export function useAuth() {
       return AuthService.registration(data.email, data.username!, data.password);
     },
     onSuccess: (response: AxiosResponse<AuthResponse>) => {
-      const { setAccessTokenToLocalStorage } = authLocalStorageHelper();
-      setAccessTokenToLocalStorage(response.data.accessToken);
+      AuthLocalStorageHelper.setAccessTokenToLocalStorage(response.data.accessToken);
       authStore.setAuth(true);
     },
     onSettled: async () => {
@@ -48,9 +46,7 @@ export function useAuth() {
     },
     onError: async (error, variables, context) => {
       if (context && context.status === 200) {
-        const { setAccessTokenToLocalStorage } = authLocalStorageHelper();
-        console.log(context.data.accessToken);
-        setAccessTokenToLocalStorage(context.data.accessToken);
+        AuthLocalStorageHelper.setAccessTokenToLocalStorage(context.data.accessToken);
         authStore.setAuth(true);
         await queryClient.invalidateQueries({ queryKey: ['user'] });
       }
@@ -62,8 +58,7 @@ export function useAuth() {
       return AuthService.logout();
     },
     onSettled: async () => {
-      const { removeAccessTokenFromLocalStorage } = authLocalStorageHelper();
-      removeAccessTokenFromLocalStorage();
+      AuthLocalStorageHelper.removeAccessTokenFromLocalStorage();
       authStore.setAuth(false);
       await queryClient.resetQueries({ queryKey: ['user'] });
     },

@@ -1,12 +1,10 @@
-import gameColyseusHelper from '../../helpers/gameColyseusHelper.ts';
 import { Paper, ThemeProvider, Typography } from '@mui/material';
-import { gameStore } from '../../store/game-store.ts';
+import { gameRoom } from '../../rooms/game-room.ts';
 import { inputTheme } from '../../theme/theme.ts';
 import MyButton from '../ui/MyButton.tsx';
 import * as React from 'react';
 
 const GameConfirm: React.FC = () => {
-  console.log(gameStore.isWaitingEnemy);
   return (
     <ThemeProvider theme={inputTheme}>
       <Paper
@@ -26,8 +24,8 @@ const GameConfirm: React.FC = () => {
         </Typography>
         <MyButton
           width='100%'
-          onClick={async () => {
-            await gameColyseusHelper.confirmGame();
+          onClick={() => {
+            gameRoom.confirmedGame();
           }}
         >
           Confirm

@@ -1,4 +1,4 @@
-import { authLocalStorageHelper } from '../helpers/authLocalStorageHelper.ts';
+import { AuthLocalStorageHelper } from '../helpers/authLocalStorageHelper.ts';
 import { AuthResponse } from '../models/response/AuthResponse.ts';
 import axios from 'axios';
 
@@ -11,8 +11,7 @@ const $api = axios.create({
 });
 
 $api.interceptors.request.use((config) => {
-  const { getAccessTokenFromLocalStorage } = authLocalStorageHelper();
-  const accessToken = getAccessTokenFromLocalStorage();
+  const accessToken = AuthLocalStorageHelper.getAccessTokenFromLocalStorage();
   config.headers.Authorization = `Bearer ${accessToken}`;
   return config;
 });
@@ -29,7 +28,7 @@ $api.interceptors.response.use(
         const response = await axios.get<AuthResponse>(`${BASE_API_URL}/refresh`, {
           withCredentials: true,
         });
-        localStorage.setItem('accessToken', response.data.accessToken);
+        AuthLocalStorageHelper.setAccessTokenToLocalStorage(response.data.accessToken);
         originalRequest.headers.Authorization = `Bearer ${response.data.accessToken}`;
         return axios(originalRequest);
       } catch (e) {

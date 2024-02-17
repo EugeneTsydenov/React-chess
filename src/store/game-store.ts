@@ -1,11 +1,8 @@
+import { IStartGame } from '../models/IStartGame.ts';
+import { IMovedData } from '../models/IMovedData.ts';
 import { makeAutoObservable } from 'mobx';
 
 class GameStore {
-  isSearch = false;
-  isConfirmed = false;
-  isStartGame = false;
-  isWaitingEnemy = false;
-  roomId = '';
   enemyId: number | null = null;
   gameFen: string = '';
   userColor: 'w' | 'b' | '' = '';
@@ -15,26 +12,6 @@ class GameStore {
   isGameOver: boolean = false;
   constructor() {
     makeAutoObservable(this);
-  }
-
-  setSearch(bool: boolean) {
-    this.isSearch = bool;
-  }
-
-  setConfirmed(bool: boolean) {
-    this.isConfirmed = bool;
-  }
-
-  setStartGame(bool: boolean) {
-    this.isStartGame = bool;
-  }
-
-  setWaitingEnemy(bool: boolean) {
-    this.isWaitingEnemy = bool;
-  }
-
-  setRoomId(roomId: string) {
-    this.roomId = roomId;
   }
 
   setEnemyId(enemyId: number) {
@@ -63,6 +40,21 @@ class GameStore {
 
   setGameOver(bool: boolean) {
     this.isGameOver = bool;
+  }
+
+  public startGame(payload: IStartGame) {
+    this.setEnemyId(payload.enemy);
+    this.setGameFen(payload.gameFen);
+    this.setUserColor(payload.playerColor);
+    gameStore.setTurn(payload.turn);
+  }
+
+  moved(gameData: IMovedData) {
+    this.setGameFen(gameData.fen);
+    this.setTurn(gameData.turn);
+    this.setCheck(gameData.isCheck);
+    this.setCheckmate(gameData.isCheckmate);
+    this.setGameOver(gameData.isGameOver);
   }
 }
 

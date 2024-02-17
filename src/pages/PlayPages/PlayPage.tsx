@@ -1,6 +1,6 @@
 import Chess from '../../components/online-chess-components/Chess.tsx';
+import { matchmakingStore } from '../../store/matchmaking-store.ts';
 import { Navigate, useParams } from 'react-router-dom';
-import { gameStore } from '../../store/game-store.ts';
 import { Box, Container } from '@mui/material';
 import Layout from '../../layouts/Layout.tsx';
 import { observer } from 'mobx-react-lite';
@@ -9,7 +9,7 @@ import * as React from 'react';
 const PlayPage: React.FC = observer(() => {
   const params = useParams();
 
-  if (params.id !== gameStore.roomId) {
+  if (params.id !== matchmakingStore.roomId) {
     return <Navigate to='/' />;
   }
 

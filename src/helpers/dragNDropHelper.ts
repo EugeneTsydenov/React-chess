@@ -1,6 +1,6 @@
 import { Piece, Square } from 'react-chessboard/dist/chessboard/types';
-import gameColyseusHelper from './gameColyseusHelper.ts';
 import { gameStore } from '../store/game-store.ts';
+import { gameRoom } from '../rooms/game-room.ts';
 
 interface IDragPiece {
   piece: Piece;
@@ -12,7 +12,7 @@ export function isDraggablePiece({ piece }: IDragPiece) {
 }
 
 export function onDrop(sourceSquare: Square, targetSquare: Square) {
-  gameColyseusHelper.move({
+  gameRoom.move({
     from: sourceSquare,
     to: targetSquare,
   });
