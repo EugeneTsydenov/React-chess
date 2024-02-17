@@ -1,26 +1,19 @@
-export function gameLocalStorageHelper() {
-  const key = 'roomId';
+export class GameLocalStorageHelper {
+  private static localStorageKey = 'roomId';
 
-  function setRoomIdToLocalStorage(value: string) {
-    localStorage.setItem(key, value);
+  public static setRoomIdToLocalStorage(roomId: string) {
+    localStorage.setItem(this.localStorageKey, roomId);
   }
 
-  function checkUserPlaying() {
-    return localStorage.getItem(key);
+  public static getRoomIdFromLocalStorage() {
+    return localStorage.getItem(this.localStorageKey);
   }
 
-  function removeRoomIdFromLocalStorage() {
-    localStorage.removeItem(key);
+  public static removeRoomIdFromLocalStorage() {
+    localStorage.removeItem(this.localStorageKey);
   }
 
-  function getRoomIdFromLocalStorage() {
-    return localStorage.getItem(key);
+  public static isInGame() {
+    return !!localStorage.getItem(this.localStorageKey);
   }
-
-  return {
-    setRoomIdToLocalStorage,
-    checkUserPlaying,
-    removeRoomIdFromLocalStorage,
-    getRoomIdFromLocalStorage,
-  };
 }
