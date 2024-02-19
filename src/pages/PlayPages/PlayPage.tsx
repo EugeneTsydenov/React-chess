@@ -5,7 +5,6 @@ import { Box, Container } from '@mui/material';
 import Layout from '../../layouts/Layout.tsx';
 import { observer } from 'mobx-react-lite';
 import * as React from 'react';
-import { gameStore } from '../../store/game-store.ts';
 
 const PlayPage: React.FC = observer(() => {
   const params = useParams();
