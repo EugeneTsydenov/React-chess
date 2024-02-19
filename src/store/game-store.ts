@@ -1,24 +1,23 @@
 import { Square } from 'react-chessboard/dist/chessboard/types';
-import { IStartGame } from '../models/IStartGame.ts';
+import { IEnemy, IStartGame } from '../models/IStartGame.ts';
 import { IMovedData } from '../models/IMovedData.ts';
 import { makeAutoObservable } from 'mobx';
 
 class GameStore {
   move: string | null | undefined;
-  enemyId: number | null = null;
+  enemy: IEnemy | null = null;
   gameFen: string = '';
   userColor: 'w' | 'b' | '' = '';
   turn: 'w' | 'b' | '' = '';
   isCheck: boolean = false;
-  isCheckmate: boolean = false;
-  isGameOver: boolean = false;
   kingSquareIsInCheck: Square | '' = '';
+  isGameOver: boolean = false
   constructor() {
     makeAutoObservable(this);
   }
 
-  setEnemyId(enemyId: number) {
-    this.enemyId = enemyId;
+  setEnemy(enemy: IEnemy) {
+    this.enemy = enemy;
   }
 
   setGameFen(gameFen: string) {
@@ -37,14 +36,9 @@ class GameStore {
     this.isCheck = bool;
   }
 
-  setCheckmate(bool: boolean) {
-    this.isCheckmate = bool;
-  }
-
   setGameOver(bool: boolean) {
-    this.isGameOver = bool;
+    this.isGameOver = bool
   }
-
   setKingSquareIsInCheck(kingSquare: Square | '') {
     this.kingSquareIsInCheck = kingSquare;
   }
@@ -54,7 +48,7 @@ class GameStore {
   }
 
   public startGame(payload: IStartGame) {
-    this.setEnemyId(payload.enemy);
+    this.setEnemy(payload.enemy);
     this.setGameFen(payload.gameFen);
     this.setUserColor(payload.playerColor);
     this.setTurn(payload.turn);
@@ -64,10 +58,9 @@ class GameStore {
     this.setGameFen(gameData.fen);
     this.setTurn(gameData.turn);
     this.setCheck(gameData.isCheck);
-    this.setCheckmate(gameData.isCheckmate);
-    this.setGameOver(gameData.isGameOver);
     this.setKingSquareIsInCheck(gameData.kingSquareIsInCheck);
     this.setMove(gameData.move);
+    this.setGameOver(gameData.isGameOver)
   }
 }
 

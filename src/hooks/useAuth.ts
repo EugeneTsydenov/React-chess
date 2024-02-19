@@ -44,12 +44,12 @@ export function useAuth() {
     onMutate: () => {
       return AuthService.refresh();
     },
-    onError: async (error, variables, context) => {
-      if (context && context.status === 200) {
-        AuthLocalStorageHelper.setAccessTokenToLocalStorage(context.data.accessToken);
-        authStore.setAuth(true);
-        await queryClient.invalidateQueries({ queryKey: ['user'] });
-      }
+    onSuccess: (response) => {
+      AuthLocalStorageHelper.setAccessTokenToLocalStorage(response?.data.accessToken);
+    },
+    onSettled: async () => {
+      authStore.setAuth(true);
+      await queryClient.invalidateQueries({ queryKey: ['user'] });
     },
   });
 
