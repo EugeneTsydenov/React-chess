@@ -8,6 +8,8 @@ import { gameStore } from '../store/game-store.ts';
 import { IMoveData } from '../models/IMoveData.ts';
 import client from '../http/colyseus.ts';
 import { Room } from 'colyseus.js';
+import { IResultGameData } from '../models/IResultGameData.ts';
+import { resultGameStore } from '../store/result-game-store.ts';
 
 class GameRoom {
   public room: Room | null = null;
@@ -51,6 +53,9 @@ class GameRoom {
       room.onMessage('moved', (gameData: IMovedData) => {
         this.moved(gameData);
       });
+      room.onMessage('game over', (resultGameData: IResultGameData) => {
+        this.gameOver(resultGameData)
+      })
     }
   }
 
@@ -115,6 +120,12 @@ class GameRoom {
         });
       });
     });
+  }
+
+  gameOver(resultGameData: IResultGameData) {
+    gameStore.setGameFen(resultGameData.fen);
+    resultGameStore.gameOver(resultGameData);
+    gameStore.setGameOver(true)
   }
 }
 

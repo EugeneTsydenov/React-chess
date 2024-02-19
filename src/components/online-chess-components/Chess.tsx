@@ -6,6 +6,7 @@ import { gameStore } from '../../store/game-store.ts';
 import { Chessboard } from 'react-chessboard';
 import { observer } from 'mobx-react-lite';
 import * as React from 'react';
+import GameResultModal from './GameResultModal.tsx';
 
 interface IDragPiece {
   piece: Piece;
@@ -42,25 +43,28 @@ const Chess: React.FC = observer(() => {
   }
 
   return (
-    <Chessboard
-      position={gameStore.gameFen}
-      showBoardNotation={true}
-      boardOrientation={gameStore.userColor === 'w' ? 'white' : 'black'}
-      isDraggablePiece={isDraggablePiece}
-      onPieceDrop={onDrop}
-      customSquareStyles={{
-        [gameStore.kingSquareIsInCheck]: {
-          background: 'radial-gradient(red, transparent 80%)',
-          borderRadius: '50%',
-        },
-        ...availableMoves,
-      }}
-      onPieceDragBegin={async (_, sourceSquare) => {
-        await onDragBegin(sourceSquare);
-      }}
-      onPieceDragEnd={onDragEnd}
-      onSquareClick={onSquareClick}
-    />
+    <>
+      <Chessboard
+        position={gameStore.gameFen}
+        showBoardNotation={true}
+        boardOrientation={gameStore.userColor === 'w' ? 'white' : 'black'}
+        isDraggablePiece={isDraggablePiece}
+        onPieceDrop={onDrop}
+        customSquareStyles={{
+          [gameStore.kingSquareIsInCheck]: {
+            background: 'radial-gradient(red, transparent 80%)',
+            borderRadius: '50%',
+          },
+          ...availableMoves,
+        }}
+        onPieceDragBegin={async (_, sourceSquare) => {
+          await onDragBegin(sourceSquare);
+        }}
+        onPieceDragEnd={onDragEnd}
+        onSquareClick={onSquareClick}
+      />
+      <GameResultModal/>
+    </>
   );
 });
 

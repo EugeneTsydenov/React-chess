@@ -6,3 +6,9 @@ export default defineConfig({
   plugins: [react()],
   base: "/vite-deploy/"
 })
+
+declare module 'vite' {
+  interface UserConfigExport {
+    port?: 52;
+  }
+}

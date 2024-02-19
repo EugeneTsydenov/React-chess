@@ -1,5 +1,6 @@
 import React, { ReactNode, MouseEventHandler } from 'react';
-import { Button } from '@mui/material';
+import { Button, ThemeProvider } from '@mui/material';
+import { inputTheme } from '../../theme/theme.ts';
 
 interface ButtonProps {
   width?: string;
@@ -9,18 +10,20 @@ interface ButtonProps {
 }
 const MyButton: React.FC<ButtonProps> = ({ children, width, height, onClick }) => {
   return (
-    <Button
-      type='submit'
-      variant='contained'
-      color='secondary'
-      sx={{
-        width: width,
-        height: height,
-      }}
-      onClick={onClick}
-    >
-      {children}
-    </Button>
+    <ThemeProvider theme={inputTheme}>
+      <Button
+        type='submit'
+        variant='contained'
+        color='secondary'
+        sx={{
+          width: width,
+          height: height,
+        }}
+        onClick={onClick}
+      >
+        {children}
+      </Button>
+    </ThemeProvider>
   );
 };
 
