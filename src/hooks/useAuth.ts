@@ -1,7 +1,8 @@
 import { useMutation, UseMutationResult, useQueryClient } from '@tanstack/react-query';
-import { authLocalStorageHelper } from '../helpers/authLocalStorageHelper.ts';
-import AuthService from '../services/AuthService.ts';
-import { authStore } from '../store/store.ts';
+import { AuthLocalStorageHelper } from '../helpers/authLocalStorageHelper.ts';
+import { AuthResponse } from '../models/response/AuthResponse.ts';
+import AuthService from '../services/auth-service.ts';
+import { authStore } from '../store/auth-store.ts';
 import { AxiosResponse } from 'axios';
 
 interface IData {
@@ -17,9 +18,8 @@ export function useAuth() {
     mutationFn: (data: IData) => {
       return AuthService.login(data.email, data.password);
     },
-    onSuccess: () => {
-      const { setAuthToLocalStorage } = authLocalStorageHelper();
-      setAuthToLocalStorage();
+    onSuccess: (response: AxiosResponse<AuthResponse>) => {
+      AuthLocalStorageHelper.setAccessTokenToLocalStorage(response.data.accessToken);
       authStore.setAuth(true);
     },
     onSettled: async () => {
@@ -31,9 +31,8 @@ export function useAuth() {
     mutationFn: (data: IData) => {
       return AuthService.registration(data.email, data.username!, data.password);
     },
-    onSuccess: () => {
-      const { setAuthToLocalStorage } = authLocalStorageHelper();
-      setAuthToLocalStorage();
+    onSuccess: (response: AxiosResponse<AuthResponse>) => {
+      AuthLocalStorageHelper.setAccessTokenToLocalStorage(response.data.accessToken);
       authStore.setAuth(true);
     },
     onSettled: async () => {
@@ -45,16 +44,12 @@ export function useAuth() {
     onMutate: () => {
       return AuthService.refresh();
     },
-    onSuccess: () => {
-      const { setAuthToLocalStorage } = authLocalStorageHelper();
-      setAuthToLocalStorage();
+    onSuccess: (response) => {
+      AuthLocalStorageHelper.setAccessTokenToLocalStorage(response?.data.accessToken);
     },
-    onSettled: async () => (
-      await queryClient.invalidateQueries({ queryKey: ['user'] }), authStore.setAuth(true)
-    ),
-    onError: () => {
-      queryClient.removeQueries({ queryKey: ['user'] });
-      authStore.setAuth(false);
+    onSettled: async () => {
+      authStore.setAuth(true);
+      await queryClient.invalidateQueries({ queryKey: ['user'] });
     },
   });
 
@@ -63,8 +58,7 @@ export function useAuth() {
       return AuthService.logout();
     },
     onSettled: async () => {
-      const { removeAuthFromLocalStorage } = authLocalStorageHelper();
-      removeAuthFromLocalStorage();
+      AuthLocalStorageHelper.removeAccessTokenFromLocalStorage();
       authStore.setAuth(false);
       await queryClient.resetQueries({ queryKey: ['user'] });
     },

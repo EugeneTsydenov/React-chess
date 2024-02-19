@@ -1,6 +1,5 @@
 import {
   Box,
-  Button,
   FormControl,
   IconButton,
   InputAdornment,
@@ -12,6 +11,7 @@ import {
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import { FormValues } from '../../models/IForm.ts';
 import { inputTheme } from '../../theme/theme';
+import MyButton from '../ui/MyButton.tsx';
 import { useForm } from 'react-hook-form';
 import * as React from 'react';
 
@@ -108,17 +108,7 @@ const DefForm: React.FC<DefFormProps> = ({ method, name }) => {
               label='Password'
             />
           </FormControl>
-          <Button
-            type='submit'
-            variant='contained'
-            color='secondary'
-            sx={{
-              width: '47ch',
-              mb: '25px',
-            }}
-          >
-            {name === 'login' ? 'login' : 'registration'}
-          </Button>
+          <MyButton width='47ch'>{name === 'login' ? 'login' : 'registration'}</MyButton>
         </Box>
       </form>
     </ThemeProvider>

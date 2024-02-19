@@ -1,5 +1,5 @@
 import { AuthResponse } from '../models/response/AuthResponse.ts';
-import $api, { BASE_API_URL } from '../http/main.ts';
+import { BASE_API_URL, $api } from '../http/main.ts';
 import axios, { AxiosResponse } from 'axios';
 import { IUser } from '../models/IUser.ts';
 

@@ -1,4 +1,4 @@
-import { authLocalStorageHelper } from './helpers/authLocalStorageHelper.ts';
+import { AuthLocalStorageHelper } from './helpers/authLocalStorageHelper.ts';
 import AppRouter from './route/AppRouter.tsx';
 import { useAuth } from './hooks/useAuth.ts';
 import { observer } from 'mobx-react-lite';
@@ -8,10 +8,8 @@ import './styles/App.css';
 const App: React.FC = observer(() => {
   const { refresh } = useAuth();
 
-  const { checkAuth } = authLocalStorageHelper();
-  const isAuth = checkAuth();
-
   React.useEffect(() => {
+    const isAuth = AuthLocalStorageHelper.isAuth();
     if (isAuth) {
       refresh.mutate({});
     }

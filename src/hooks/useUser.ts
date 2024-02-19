@@ -1,6 +1,6 @@
-import AuthService from '../services/AuthService.ts';
+import AuthService from '../services/auth-service.ts';
+import { authStore } from '../store/auth-store.ts';
 import { useQuery } from '@tanstack/react-query';
-import { authStore } from '../store/store.ts';
 import { IUser } from '../models/IUser.ts';
 
 function useUser() {

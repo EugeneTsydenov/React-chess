@@ -1,4 +1,4 @@
-import NavDropDownMenu from '../NavDropDownMenu/NavDropDownMenu.tsx';
+import NavDropDownMenu from '../nav-dropdown-menu/NavDropDownMenu.tsx';
 import { Box, Typography } from '@mui/material';
 import { Links } from '../../models/Links.ts';
 import { NavLink } from 'react-router-dom';

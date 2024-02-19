@@ -1,6 +1,6 @@
 import { Box, IconButton, Menu } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
-import NavBar from '../NavBar/Navbar.tsx';
+import NavBar from '../navbar/Navbar.tsx';
 import * as React from 'react';
 
 const MobileMenu: React.FC = () => {
