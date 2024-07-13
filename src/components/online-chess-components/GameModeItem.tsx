@@ -4,8 +4,8 @@ import * as React from 'react';
 
 interface GameModeItem {
   gameMode: IMode;
-  selectedMode: string | null;
-  handleClick: (mode: string) => void;
+  selectedMode: IMode | null;
+  handleClick: (mode: IMode) => void;
 }
 
 const GameModeItem: React.FC<GameModeItem> = React.memo(
@@ -18,11 +18,11 @@ const GameModeItem: React.FC<GameModeItem> = React.memo(
           cursor: 'pointer',
           display: 'grid',
           placeItems: 'center',
-          opacity: selectedMode !== gameMode.serverMode ? '0.8' : '1',
-          backgroundColor: selectedMode === gameMode.serverMode ? 'primary.light' : 'primary',
+          opacity: selectedMode?.serverMode !== gameMode.serverMode ? '0.8' : '1',
+          backgroundColor: selectedMode?.serverMode === gameMode.serverMode ? 'primary.light' : 'primary',
         }}
         onClick={() => {
-          handleClick(gameMode.serverMode);
+          handleClick(gameMode);
         }}
       >
         <Typography variant='h5'>{gameMode.clientMode}</Typography>

@@ -10,12 +10,14 @@ import client from '../http/colyseus.ts';
 import { Room } from 'colyseus.js';
 import { IResultGameData } from '../models/IResultGameData.ts';
 import { resultGameStore } from '../store/result-game-store.ts';
+import { IMode } from '../models/IMode.ts';
 
 class GameRoom {
   public room: Room | null = null;
 
   private getAccessToken() {
     const accessToken = AuthLocalStorageHelper.getAccessTokenFromLocalStorage();
+    console.log(accessToken);
     if (!accessToken) {
       throw new Error('Not Auth');
     }
@@ -23,10 +25,11 @@ class GameRoom {
     return accessToken;
   }
 
-  public async findGame(mode: string) {
+  public async findGame(mode: IMode) {
     try {
       const accessToken = this.getAccessToken();
-      this.room = await client.joinOrCreate(mode, { mode, accessToken });
+      this.room = await client.joinOrCreate(mode.serverMode, { mode, accessToken });
+      gameStore.setTime(mode.time)
       if (this.room) {
         this.onMessage();
       }

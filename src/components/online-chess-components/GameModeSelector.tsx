@@ -5,11 +5,12 @@ import gameModes from '../../data/GameModes.ts';
 import GameModeItem from './GameModeItem.tsx';
 import MyButton from '../ui/MyButton.tsx';
 import React from 'react';
+import { IMode } from '../../models/IMode.ts';
 
-const GameModeSelector: React.FC = () => {
-  const [selectedMode, setSelectedMode] = React.useState<string | null>(null);
+const GameModeSelector: React.FC = React.memo(() => {
+  const [selectedMode, setSelectedMode] = React.useState<IMode | null>(null);
 
-  const handleClick = (mode: string) => {
+  const handleClick = (mode: IMode) => {
     setSelectedMode(mode);
   };
 
@@ -47,6 +48,6 @@ const GameModeSelector: React.FC = () => {
       </Box>
     </ThemeProvider>
   );
-};
+});
 
 export default GameModeSelector;

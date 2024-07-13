@@ -9,6 +9,7 @@ const LoginForm: React.FC = observer(() => {
 
   async function handleSubmit(data: FormValues): Promise<void> {
     login.mutate(data);
+    login.
   }
 
   return <DefFrom method={handleSubmit} name='login' />;

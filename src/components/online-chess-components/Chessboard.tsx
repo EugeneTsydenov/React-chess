@@ -3,17 +3,17 @@ import { paintSquareHelper } from '../../helpers/paintSquareHelper.ts';
 import { useClickSquare } from '../../hooks/useClickSquare.ts';
 import { moveHelper } from '../../helpers/moveHelper.ts';
 import { gameStore } from '../../store/game-store.ts';
-import { Chessboard } from 'react-chessboard';
+import { Chessboard} from 'react-chessboard';
 import { observer } from 'mobx-react-lite';
 import * as React from 'react';
-import GameResultModal from './GameResultModal.tsx';
 
 interface IDragPiece {
   piece: Piece;
   sourceSquare: Square;
 }
 
-const Chess: React.FC = observer(() => {
+const MyChessboard: React.FC = observer(() => {
+  console.log('render');
   const [availableMoves, setAvailableMoves] = React.useState({});
   const { onSquareClick } = useClickSquare(setAvailableMoves);
 
@@ -45,6 +45,9 @@ const Chess: React.FC = observer(() => {
   return (
     <>
       <Chessboard
+        customBoardStyle={{
+          width: '640px'
+        }}
         position={gameStore.gameFen}
         showBoardNotation={true}
         boardOrientation={gameStore.userColor === 'w' ? 'white' : 'black'}
@@ -63,9 +66,8 @@ const Chess: React.FC = observer(() => {
         onPieceDragEnd={onDragEnd}
         onSquareClick={onSquareClick}
       />
-      <GameResultModal/>
     </>
   );
 });
 
-export default Chess;
+export default MyChessboard;
